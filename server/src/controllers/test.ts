@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 
 class GetTestControler {
   public getTest = async (req: Request, res: Response) => {
-    console.log('test ctl');
     
     try {
       
