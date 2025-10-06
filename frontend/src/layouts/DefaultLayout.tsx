@@ -1,26 +1,35 @@
-// src/layouts/productCustomerLayout.tsx
-import React from 'react';
-import Header from '../components/header/Header';
-import Footer from '../components/footer/Footer';
-import './productCustomerLayout.scss';  // Sử dụng SCSS cho sản phẩm khách hàng
+import { ReactNode } from "react";
+import Sidebar from "../components/sidebar/Sidebar";
+import Header from "../components/header/Header";
+import  "./DefaultLayout.scss";
+import Footer from "../components/footer/Footer";
+import Breadcrumb from "../components/breadcrumb/Breadcrumb";
+  interface DefaultLayoutProps {
+    children: ReactNode;
+  }
 
-const ProductCustomerLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div className="product-customer-layout">
-      <Header />
-      
-      {/* Nếu có Sidebar, bạn có thể dùng hoặc loại bỏ tùy theo yêu cầu */}
-      <div className="layout-container">
-        
-        
-        <main className="content">
-          {children}
-        </main>
-      </div>
+  const DefaultLayout = ({ children }: DefaultLayoutProps) => {
+    return (
+        <>
+            <div className="layout-container">
+                <div className="sidebar">
+                    <Sidebar/>
+                </div>
+                <div className="header">
+                  <Header/>
+                </div>
+                <div className="content">
+                  <div className="breadcrums">
+                    <Breadcrumb></Breadcrumb>
+                  </div>
+                    {children}
+                </div>
+                <div className="footer">
+                  <Footer/>
+                </div>
+            </div>
+        </>
+    )
+  };
 
-      <Footer />
-    </div>
-  );
-};
-
-export default ProductCustomerLayout;
+  export default DefaultLayout;

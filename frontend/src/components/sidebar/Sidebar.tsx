@@ -1,3 +1,4 @@
+// frontend/src/components/sidebar/Sidebar.tsx
 import "./Sidebar.scss";
 import logo from "../../assets/images/icons8-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,14 +30,29 @@ import { Link, useLocation } from "react-router-dom";
 //them
 import { useSelector } from "react-redux";
 
-const menus = [
-    { id: 1, name: "Dashboard", path: "/" },
-    { id: 2, name: "Department", path: "/department" },
-    { id: 3, name: "Employee", path: "/employee" },
-    { id: 4, name: "Timekeeping", path: "/timekeeping" },
-    { id: 5, name: "Payroll", path: "/payroll" },
-    
+type Role = "role_1" | "role_2" | "role_3" | undefined;
+
+type MenuItem = {
+  key: string;
+  name: string;
+  path: string;
+  icon: any;
+};
+
+const menus: MenuItem[] = [
+  { key: "dashboard",  name: "Dashboard",  path: "/dashboard",  icon: faChartBar }, // ✅ /dashboard mới đúng
+  { key: "employee",   name: "Employee",   path: "/employee",   icon: faAddressCard },
+  { key: "timekeeping",name: "Timekeeping",path: "/timekeeping",icon: faCalendarDays },
+  { key: "payroll",    name: "Payroll",    path: "/payroll",    icon: faHardDrive },
+  { key: "department", name: "Department", path: "/department", icon: faFolder },
 ];
+
+const canSee = (item: MenuItem, role: Role) => {
+  if (role === "role_1") return true; // admin: thấy tất cả
+  if (role === "role_2") return item.name !== "Department";
+  if (role === "role_3") return !["Department", "Employee"].includes(item.name);
+  return true; // mặc định: cứ cho thấy (tránh bị ẩn hết nếu role chưa load)
+};
 const Sidebar = () => {
     // const
     const userRole = useSelector((state: any) => state.auth.user?.role_code);
@@ -92,35 +108,27 @@ const Sidebar = () => {
                     <div className="menu">
                         <p>DIRECTORIES</p>
                         <span>HRMS</span>
-                        {menus.map((item, index) => {
-                            let isVisible = false;
 
-                            if (userRole === "role_1") {
-                              isVisible = true; // admin thấy tất cả
-                            } else if (userRole === "role_2") {
-                              isVisible = item.name !== "Department"; // leader không thấy Department
-                            } else if (userRole === "role_3") {
-                              isVisible = !["Department", "Employee"].includes(item.name); // member không thấy cả hai
-                            }
-                          
-                            if (!isVisible) return null;
-                          
+                        {menus
+                            .filter((m) => canSee(m, userRole))
+                            .map((item) => {
+                            const isActive = location.pathname.startsWith(item.path); // tốt hơn so sánh exact
                             return (
-                              <Link
-                                key={index}
+                                <Link
+                                key={item.key}
                                 to={item.path}
-                                className={`menu-item pointer ${item.path === location.pathname ? "menu-active" : ""}`}
-                              >
+                                className={`menu-item pointer ${isActive ? "menu-active" : ""}`}
+                                >
                                 <p>
-                                  <FontAwesomeIcon
-                                    icon={item.path === location.pathname ? faArrowRight : faEllipsis}
+                                    <FontAwesomeIcon
+                                    icon={isActive ? faArrowRight : faEllipsis}
                                     className="menu-item-icon"
-                                  />
-                                  {item.name}
+                                    />
+                                    {item.name}
                                 </p>
-                              </Link>
+                                </Link>
                             );
-                        })}
+                            })}
                     </div>
                     <div className="menu-plus">
                         <div className="menu-plus-wrap">

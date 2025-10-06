@@ -1,65 +1,109 @@
-// frontend/src/pages/login/login.tsx
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import AxiosInstance from '../../services/axios';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../redux/features/authSlice'; // Import action setUser từ authSlice
+import { setUser } from '../../redux/features/authSlice';
 import { useNavigate } from 'react-router-dom';
 import './login.scss';
+import Button from '../../components/forms/button/Button';
+import { Card } from 'primereact/card';
+import InputField from '../../components/forms/input/InputField';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
 
     try {
       const response = await AxiosInstance.post('/api/auth/login', { email, password });
       const { success, message, data } = response.data;
-      
+
       if (success) {
-        // Nếu đăng nhập thành công, lưu thông tin vào localStorage và chuyển hướng tới trang dashboard
         localStorage.setItem('user', JSON.stringify(data));
-        localStorage.setItem('token', data.token);  // Lưu token nếu cần
-        dispatch(setUser(data));  // Lưu user vào Redux
-        navigate('/dashboard'); // Chuyển hướng tới dashboard
+        localStorage.setItem('token', data.token);
+        dispatch(setUser(data));
+        navigate('/dashboard');
       } else {
-        setErrorMessage(message);
+        setErrorMessage(message || 'Đăng nhập thất bại!');
       }
     } catch (error) {
-      console.error("Login error:", error);
-      setErrorMessage("Đăng nhập thất bại, vui lòng thử lại!");
+      console.error('Login error:', error);
+      setErrorMessage('Đăng nhập thất bại, vui lòng thử lại!');
     }
   };
 
   return (
-    <div className="login-page">
-      <h2>Đăng Nhập</h2>
-      <form onSubmit={handleLogin}>
-        <div className="form-group">
-          <input
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="login">
+      <Card>
+        <div className="login-card">
+          <div className="login-content">
+            {/* --- Logo --- */}
+            <div className="card-logo">
+              <img
+                src="/static/media/icons8-logo.a946c11612681281646f5888f196edaa.svg"
+                alt="Logo"
+              />
+            </div>
+
+            {/* --- Form --- */}
+            <div className="card-form">
+              <form className="login-form" onSubmit={handleLogin}>
+                <div className="form-item">
+                  <div className="form-title">LOGIN TO YOUR ACCOUNT</div>
+
+                  <div className="mb-3">
+                    <InputField
+                      className="form-input"
+                      type="email"
+                      name="email"
+                      placeholder="Enter email"
+                      value={email}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        setEmail(e.target.value);
+                        setErrorMessage("");
+                      }}
+                      required
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <InputField
+                      className="form-input"
+                      type="password"
+                      name="password"
+                      placeholder="Enter password"
+                      value={password}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        setPassword(e.target.value);
+                        setErrorMessage("");
+                      }}
+                      required
+                    />
+                  </div>
+
+                  {errorMessage && (
+                    <p className="text-error">{errorMessage}</p>
+                  )}
+                </div>
+
+                <div className="form-footer">
+                  <Button
+                    className="btn-login"
+                    type="submit"
+                    label="Submit"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
-        <button type="submit">Login</button>
-      </form>
+      </Card>
     </div>
   );
 };

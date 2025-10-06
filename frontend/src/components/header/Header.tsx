@@ -1,3 +1,4 @@
+// frontend/src/components/header/Header.tsx
 import { faBell, faEnvelope, faUser } from "@fortawesome/free-solid-svg-icons";
 import InputField from "../forms/input/InputField";
 import "./Header.scss";
@@ -6,9 +7,9 @@ import { Card } from "primereact/card";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/features/authSlice";
-import io from "socket.io-client";
 import AxiosInstance from "../../services/axios";
 import apiUrl from "../../constant/apiUrl";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -19,33 +20,40 @@ const Header = () => {
   >([]);
   const dispatch = useDispatch();
   console.log("dataNotifiCation", dataNotifiCation);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getNotification();
-    const socket = io("http://localhost:3000");
-    socket.on("employee_created", (data) => {
-      console.log("employee_created", data);
-      if (data) {
-        getNotification();
-        setShowNotification(true);
-      }
-    });
-    return () => {
-      socket.disconnect();
-    };
+
+    // Giả lập "polling" – tự động gọi lại API mỗi 10 giây
+    const interval = setInterval(() => {
+      getNotification();
+    }, 10000); // 10 giây
+
+    return () => clearInterval(interval);
   }, []);
 
+  // const getNotification = async () => {
+  //   const result = await AxiosInstance.get(apiUrl.notification.index);
+  //   if (result.data) {
+  //     console.log(result.data.data);
+  //     setDataNotification(result.data.data);
+  //   }
+  // };
   const getNotification = async () => {
-    const result = await AxiosInstance.get(apiUrl.notification.index);
-    if (result.data) {
-      console.log(result.data.data);
-      setDataNotification(result.data.data);
-    }
-  };
+  try {
+    const res = await AxiosInstance.get("/api/notification");
+    setDataNotification(res.data.data || []);
+  } catch (error) {
+    console.error("Lỗi khi gọi API notification:", error);
+  }
+};
+
 
   const handleSignOut = () => {
     localStorage.clear();
     dispatch(logout());
+    navigate("/")
   };
 
   const handleNotificationClick = () => {

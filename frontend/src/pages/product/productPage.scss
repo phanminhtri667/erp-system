@@ -1,0 +1,306 @@
+@import "../../assets/css/variables.scss";
+
+.product-page {
+  background-color: $color-grey-50;
+  font-family: "Inter", sans-serif;
+  color: $color-grey-900;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  // ===== HEADER =====
+  .product-header {
+    background-color: white;
+    border-bottom: 1px solid $color-grey-200;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr; // logo | menu | icons
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      img {
+        width: 45px;
+        height: auto;
+      }
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      ul {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-weight: 500;
+        color: $color-grey-700;
+        li {
+          cursor: pointer;
+          transition: color 0.2s ease-in-out;
+          &:hover {
+            color: $color-purple-400;
+          }
+        }
+      }
+    }
+
+    .header-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+
+      .icon-btn {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: $color-grey-700;
+        cursor: pointer;
+        transition: color 0.2s;
+        &:hover {
+          color: $color-purple-400;
+        }
+      }
+
+      .login-btn {
+        background-color: $color-purple-400;
+        color: white;
+        border: none;
+        border-radius: $radius-300;
+        padding: 0.45rem 0.9rem;
+        font-size: $font-size-m;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        &:hover {
+          background-color: darken($color-purple-400, 8%);
+        }
+      }
+    }
+  }
+
+  // ===== PRODUCT GRID =====
+  .product-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem 3rem;
+    justify-items: center;
+
+    .product-card {
+      background-color: white;
+      border-radius: $radius-300;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      width: 100%;
+      max-width: 280px;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 320px;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+
+      .product-info {
+        padding: 1rem;
+        h3 {
+          font-size: $font-size-l;
+          color: $color-grey-900;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+        }
+        .price {
+          color: $color-purple-500;
+          font-weight: 700;
+          font-size: $font-size-l;
+        }
+      }
+    }
+  }
+
+  // ===== FOOTER =====
+  .footer {
+    background-color: $color-purple;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: $font-size-m;
+    margin-top: auto;
+  }
+
+  // ===== LOGIN POPUP =====
+  .login-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // nền mờ
+    .login-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      animation: fadeInOverlay 0.3s ease forwards;
+    }
+
+    // popup chính giữa
+    // popup chính giữa
+.login-popup {
+  position: relative;
+  z-index: 2100;
+  width: 400px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+  animation: zoomIn 0.25s ease-out;
+  overflow: hidden;
+
+  // nút đóng
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 1.2rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: $color-grey-400;
+    transition: color 0.2s ease;
+    &:hover {
+      color: $color-purple-400;
+    }
+  }
+
+  // chỉ ghi đè layout login khi trong popup
+  .login {
+    background: transparent;
+    min-height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .login-card {
+      width: 100%;
+      box-shadow: none;
+      border: none;
+      background: transparent;
+
+      .login-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+
+        .card-logo img {
+          width: 50px;
+          height: 50px;
+          margin-bottom: 0.5rem;
+        }
+
+        .card-form {
+          width: 100%;
+          .form-item {
+            width: 100%;
+            margin-bottom: -1.8rem;
+          }
+
+          input {
+            width: 100%;
+            height: 38px;
+            border-radius: 6px;
+            padding: 0 0.75rem;
+            border: 1px solid $color-grey-200;
+            font-size: $font-size-m;
+            transition: border-color 0.2s;
+            &:focus {
+              outline: none;
+              border-color: $color-purple-400;
+            }
+          }
+
+          .btn-login {
+            width: 100%;
+            height: 38px;
+            background-color: $color-purple-400;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            &:hover {
+              background-color: darken($color-purple-400, 8%);
+            }
+          }
+
+          .text-error {
+            color: #e74c3c;
+            text-align: center;
+            font-size: 0.9rem;
+          }
+        }
+
+        .flex-center {
+          margin-top: 1rem;
+          font-size: $font-size-s;
+          color: $color-grey-400;
+          text-align: center;
+          .signup {
+            color: $color-purple-400;
+            font-weight: 500;
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+    @keyframes fadeInOverlay {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  }
+
+}
