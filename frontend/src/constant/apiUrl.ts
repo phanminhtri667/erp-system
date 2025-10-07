@@ -1,3 +1,5 @@
+import OrderPage from "../pages/order/order";
+
 const apiUrl = {
   employee: {
     index: "api/employees",   // Lấy danh sách nhân viên
@@ -7,6 +9,9 @@ const apiUrl = {
   },
   notification: {
     index: `notification`,
+  },
+  OrderPage: {
+    index: `order`,
   },
   
 };
