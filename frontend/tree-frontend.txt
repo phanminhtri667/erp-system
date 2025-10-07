@@ -1,0 +1,79 @@
+.
+├── package.json
+├── package-lock.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo-48.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── App.scss
+│   ├── App.tsx
+│   ├── assets
+│   │   ├── css
+│   │   │   └── variables.scss
+│   │   ├── fonts
+│   │   │   ├── Montserrat-Bold.ttf
+│   │   │   ├── Montserrat-Italic.ttf
+│   │   │   ├── Montserrat-Medium.ttf
+│   │   │   └── static
+│   │   └── images
+│   │       └── icons8-logo.svg
+│   ├── components
+│   │   ├── breadcrumb
+│   │   │   ├── Breadcrumb.scss
+│   │   │   └── Breadcrumb.tsx
+│   │   ├── footer
+│   │   │   ├── Footer.scss
+│   │   │   └── Footer.tsx
+│   │   ├── forms
+│   │   │   ├── button
+│   │   │   ├── input
+│   │   │   └── select
+│   │   ├── header
+│   │   │   ├── Header.scss
+│   │   │   └── Header.tsx
+│   │   └── sidebar
+│   │       ├── Sidebar.scss
+│   │       └── Sidebar.tsx
+│   ├── constant
+│   │   └── apiUrl.ts
+│   ├── custom.d.ts
+│   ├── index.scss
+│   ├── index.tsx
+│   ├── layouts
+│   │   ├── DefaultLayout.scss
+│   │   └── DefaultLayout.tsx
+│   ├── pages
+│   │   ├── dashboard
+│   │   │   └── dashboard.tsx
+│   │   ├── employee
+│   │   │   ├── detail
+│   │   │   ├── employee.scss
+│   │   │   ├── employee.tsx
+│   │   │   ├── form
+│   │   │   └── table
+│   │   ├── emty
+│   │   │   └── emty.tsx
+│   │   ├── login
+│   │   │   ├── login.scss
+│   │   │   └── login.tsx
+│   │   └── product
+│   │       ├── productPage.scss
+│   │       └── ProductPage.tsx
+│   ├── redux
+│   │   ├── features
+│   │   │   ├── authSlice.ts
+│   │   │   └── toastSlice.ts
+│   │   └── store.ts
+│   ├── services
+│   │   └── axios.ts
+│   └── validation
+│       └── employee.ts
+├── tree-frontend.txt
+└── tsconfig.json
+
+31 directories, 45 files

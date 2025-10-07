@@ -1,0 +1,29 @@
+.
+├── package.json
+├── package-lock.json
+├── src
+│   ├── config
+│   │   └── database.ts
+│   ├── controllers
+│   │   ├── authController.ts
+│   │   ├── employeeController.ts
+│   │   ├── notificationController.ts
+│   │   └── test.ts
+│   ├── index.ts
+│   ├── models
+│   │   ├── employee.ts
+│   │   ├── notification.ts
+│   │   └── user.ts
+│   ├── routers
+│   │   ├── authRouter.ts
+│   │   ├── employeeRouter.ts
+│   │   ├── notificationRouter.ts
+│   │   └── test.ts
+│   └── services
+│       ├── authService.ts
+│       ├── employeeService.ts
+│       └── notificationService.ts
+├── tree-backend.txt
+└── tsconfig.json
+
+6 directories, 20 files
