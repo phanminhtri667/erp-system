@@ -7,6 +7,7 @@ import DefaultLayout from './layouts/DefaultLayout';
 import Dashboard from './pages/dashboard/dashboard';
 import Employee from './pages/employee/employee';
 import Emty from './pages/emty/emty';
+import OrderPage from './pages/order/order';
 
 const AppRoutes = () => {
   const isAuthenticated = useSelector((state: any) => state.auth.isAuthenticated);
@@ -30,6 +31,14 @@ const AppRoutes = () => {
       path: '/employee',
       element: isAuthenticated ? (
         <Employee />
+      ) : (
+        <Navigate to="/" />
+      ),
+    },
+    {
+      path: '/order',
+      element: isAuthenticated ? (
+        <OrderPage />
       ) : (
         <Navigate to="/" />
       ),
