@@ -4,9 +4,9 @@ const EmployeeDetail = ({...props}) => {
     const params = useParams().employeeId;
     return(
         <>
-            <DefaultLayout>
+            <div>
                 <span>{params}</span>
-            </DefaultLayout>
+            </div>
         </>
     )
 }

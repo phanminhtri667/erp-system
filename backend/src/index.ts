@@ -5,6 +5,7 @@ import  testRouter from './routers/test'
 import employeeRouter from './routers/employeeRouter'; 
 import router from './routers/authRouter';
 import notificationRouter from './routers/notificationRouter';
+import productRouter from './routers/productRouter';
 
 const app = express()
 app.use(cors({
@@ -18,6 +19,7 @@ app.use('/api/test',testRouter);
 app.use('/api/auth', router);
 app.use('/api/employees', employeeRouter);
 app.use('/api/notification', notificationRouter);
+app.use('/api/products', productRouter);
 
 const port = process.env.PORT || 8888
 app.listen(port, () => {

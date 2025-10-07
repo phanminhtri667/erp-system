@@ -1,8 +1,7 @@
-import OrderPage from "../pages/order/order";
 
 const apiUrl = {
   employee: {
-    index: "api/employees",   // Lấy danh sách nhân viên
+    index: "api/employees",   
   },
   auth: {
     login: "auth/login",
@@ -12,6 +11,9 @@ const apiUrl = {
   },
   OrderPage: {
     index: `order`,
+  },
+  product: {
+    index: `api/products`,
   },
   
 };

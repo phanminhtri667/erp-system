@@ -46,7 +46,8 @@ const menus: MenuItem[] = [
   { key: "timekeeping",name: "Timekeeping",path: "/timekeeping",icon: faCalendarDays },
   { key: "payroll",    name: "Payroll",    path: "/payroll",    icon: faHardDrive },
   { key: "department", name: "Department", path: "/department", icon: faFolder },
-  { key: "order", name: "Order", path: "/order", icon: faCartShopping  },
+  { key: "product", name: "Order", path: "/order", icon: faCartShopping  },
+  { key: "product", name: "product", path: "/product", icon: faCartShopping  },
 ];
 
 const canSee = (item: MenuItem, role: Role) => {

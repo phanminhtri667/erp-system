@@ -73,7 +73,6 @@ const Employee = () => {
 
   return (
     <>
-      <DefaultLayout>
         <TabView>
           {/* TAB 1: DANH SÁCH NHÂN VIÊN */}
           <TabPanel header="List Employee">
@@ -170,7 +169,6 @@ const Employee = () => {
             getEmployee={getEmployees}
           />
         </Dialog>
-      </DefaultLayout>
 
       <Toast ref={toast} />
     </>

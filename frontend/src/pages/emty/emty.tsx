@@ -1,13 +1,12 @@
-import DefaultLayout from "../../layouts/DefaultLayout";
 
 const Emty = () => {
     
     return (
-        <DefaultLayout>
+        <div>
             <div style={{fontSize:'18px'}}>
             <p>Page emty</p>
         </div>
-        </DefaultLayout>
+        </div>
         
     )
 }

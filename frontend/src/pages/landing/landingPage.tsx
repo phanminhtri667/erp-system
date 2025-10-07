@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import "./productPage.scss";
+import { useState } from "react";
 import logo from "../../assets/images/icons8-logo.svg";
 import Login from "../login/login";
+import "./landingPage.scss";
 
-const ProductPage = () => {
+const LandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
 
   const products = [
@@ -104,4 +104,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default LandingPage;
