@@ -36,7 +36,7 @@ const LandingPage = () => {
   return (
     <div className="product-page">
       {/* ===== HEADER ===== */}
-      <header className="product-header">
+      <header className="landing-header">
         <div className="header-inner">
           {/* Cột trái: Logo */}
           <div className="logo">
