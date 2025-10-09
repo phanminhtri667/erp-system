@@ -1,4 +1,7 @@
 @import "./assets/css/variables.scss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
   font-family: "Montserrat";
