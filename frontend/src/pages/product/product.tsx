@@ -1,7 +1,5 @@
-import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { Dialog } from "primereact/dialog";
-import { InputText } from "primereact/inputtext";
 import { TabPanel, TabView } from "primereact/tabview";
 import { Toast } from "primereact/toast";
 import { useEffect, useRef, useState } from "react";
@@ -12,7 +10,6 @@ import ProductTable from "./table/productTable";
 const Product = () => {
   const [productData, setProductData] = useState<any[]>([]);
   const [filtered, setFiltered] = useState<any[]>([]);
-  const [q, setQ] = useState<string>("");
   const [infoDataProduct, setInfoDataProduct] = useState<any>({});
   const [productSelected, setProductSelected] = useState<any>({});
   const [visible, setVisible] = useState(false);

@@ -14,7 +14,7 @@ class ProductController {
   async create(req: Request, res: Response) {
     try {
       const product = await productService.createProduct(req.body);
-      return res.status(201).json({ message: 'Tạo sản phẩm thành công', data: product });
+      return res.status(200).json({ message: 'Tạo sản phẩm thành công', data: product });
     } catch (err) {
       return res.status(500).json({ message: 'Lỗi khi tạo sản phẩm', error: err });
     }

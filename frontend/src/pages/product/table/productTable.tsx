@@ -74,7 +74,7 @@ const ProductTable = ({ data, onDelete, onSelect }: Props) => {
                 <td>{i + 1}</td>
                 <td>{e.code || e.our_code}</td>
                 <td>{e.name}</td>
-                <td><img height={'100px'} src={"https://bizweb.dktcdn.net/100/446/974/products/ao-thun-mlb-new-era-heavy-cotton-new-york-yankees-black-13086578-1.jpg?v=1691318321487"} alt={e.name} className="thumb" /> </td>
+                <td><img height={'100px'} src={e.images[0]} alt={e.name} className="thumb" /> </td>
                 <td>{e.category}</td>
                 <td>{e.size || "M"}</td>
                 <td>{e.color || "Black"}</td>

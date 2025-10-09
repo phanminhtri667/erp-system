@@ -1,27 +1,31 @@
-import express from 'express'
-import 'dotenv/config'
-import cors from 'cors';
-import  testRouter from './routers/test'
-import employeeRouter from './routers/employeeRouter'; 
-import router from './routers/authRouter';
-import notificationRouter from './routers/notificationRouter';
-import productRouter from './routers/productRouter';
+import express from "express";
+import "dotenv/config";
+import cors from "cors";
+import testRouter from "./routers/test";
+import employeeRouter from "./routers/employeeRouter";
+import router from "./routers/authRouter";
+import notificationRouter from "./routers/notificationRouter";
+import productRouter from "./routers/productRouter";
 
-const app = express()
-app.use(cors({
-  origin: 'http://localhost:3000',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-}));
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+const app = express();
 
-app.use('/api/test',testRouter);
-app.use('/api/auth', router);
-app.use('/api/employees', employeeRouter);
-app.use('/api/notification', notificationRouter);
-app.use('/api/products', productRouter);
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
-const port = process.env.PORT || 8888
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+
+app.use("/api/test", testRouter);
+app.use("/api/auth", router);
+app.use("/api/employees", employeeRouter);
+app.use("/api/notification", notificationRouter);
+app.use("/api/products", productRouter);
+
+const port = process.env.PORT || 8888;
 app.listen(port, () => {
-    console.log(`Server is running on the port ${port}`)
-})  
+  console.log(`Server is running on the port ${port}`);
+});
