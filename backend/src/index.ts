@@ -1,13 +1,25 @@
-import express from "express";
-import "dotenv/config";
 import cors from "cors";
-import testRouter from "./routers/test";
-import employeeRouter from "./routers/employeeRouter";
+import "dotenv/config";
+import express from "express";
 import router from "./routers/authRouter";
+import employeeRouter from "./routers/employeeRouter";
 import notificationRouter from "./routers/notificationRouter";
 import productRouter from "./routers/productRouter";
+import testRouter from "./routers/test";
 
 const app = express();
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
