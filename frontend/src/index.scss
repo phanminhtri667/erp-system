@@ -1,4 +1,8 @@
 @import "./assets/css/variables.scss";
+@import "primereact/resources/themes/lara-light-purple/theme.css"; 
+@import "primereact/resources/primereact.min.css";
+@import 'primeicons/primeicons.css';;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -81,9 +85,9 @@ a {
   font-weight: bold;
   border-bottom: 2px solid $color-purple-500;
 }
-// .p-button {
-//   background: $color-purple-500;
-//   color: #fff
-// }
 
-//global class
+.p-dropdown-items {
+  display: flex !important;
+  flex-direction: column !important;
+}
+

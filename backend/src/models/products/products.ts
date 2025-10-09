@@ -1,5 +1,5 @@
-import { DataTypes, Model, Optional } from 'sequelize';
-import sequelize from '../../config/database';
+import { DataTypes, Model, Optional } from "sequelize";
+import sequelize from "../../config/database";
 
 interface ProductAttributes {
   id: number;
@@ -7,15 +7,18 @@ interface ProductAttributes {
   our_code: string;
   name: string;
   category: string;
-  fiber_spec: object; // JSONB
+  fiber_spec: object;
   min_price: number;
-  images: number[]; // integer[]
-  status: boolean; // true / false
+  images: number[];
+  status: boolean;
 }
 
-interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> {}
+interface ProductCreationAttributes extends Optional<ProductAttributes, "id"> {}
 
-class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
+class Product
+  extends Model<ProductAttributes, ProductCreationAttributes>
+  implements ProductAttributes
+{
   public id!: number;
   public supplier_item_code!: string;
   public our_code!: string;
@@ -60,7 +63,7 @@ Product.init(
       allowNull: false,
     },
     images: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: true,
     },
     status: {
@@ -71,9 +74,9 @@ Product.init(
   },
   {
     sequelize,
-    modelName: 'Product',
-    tableName: 'products',
-    schema: 'san_pham',
+    modelName: "Product",
+    tableName: "products",
+    schema: "san_pham",
     timestamps: false,
   }
 );
