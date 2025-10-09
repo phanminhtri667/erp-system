@@ -45,7 +45,7 @@ const Product = () => {
               </Card>
               <Card>
                 <div className="card-body pointer">
-                  <span className="card-body-name fs-l">New Product</span>
+                  <span className="card-body-name fs-l">Deliverable Product</span>
                   <span className="card-body-content fs-2xl">
                     {infoDataProduct.newProduct || 0}
                   </span>
@@ -53,20 +53,12 @@ const Product = () => {
               </Card>
               <Card>
                 <div className="card-body pointer">
-                  <span className="card-body-name fs-l">Male</span>
+                  <span className="card-body-name fs-l">Defective Products</span>
                   <span className="card-body-content fs-2xl">
                     {infoDataProduct.male || 0}
                   </span>
                 </div>
-              </Card>
-              <Card>
-                <div className="card-body pointer">
-                  <span className="card-body-name fs-l">Female</span>
-                  <span className="card-body-content fs-2xl">
-                    {infoDataProduct.female || 0}
-                  </span>
-                </div>
-              </Card>
+              </Card> 
             </div>
 
 
