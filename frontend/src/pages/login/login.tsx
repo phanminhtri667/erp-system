@@ -66,7 +66,7 @@ const Login = () => {
                       value={email}
                       onChange={(e: ChangeEvent<HTMLInputElement>) => {
                         setEmail(e.target.value);
-                        setErrorMessage("");
+                        setErrorMessage('');
                       }}
                       required
                     />
@@ -81,23 +81,17 @@ const Login = () => {
                       value={password}
                       onChange={(e: ChangeEvent<HTMLInputElement>) => {
                         setPassword(e.target.value);
-                        setErrorMessage("");
+                        setErrorMessage('');
                       }}
                       required
                     />
                   </div>
 
-                  {errorMessage && (
-                    <p className="text-error">{errorMessage}</p>
-                  )}
+                  {errorMessage && <p className="text-error">{errorMessage}</p>}
                 </div>
 
                 <div className="form-footer">
-                  <Button
-                    className="btn-login"
-                    type="submit"
-                    label="Submit"
-                  />
+                  <Button className="btn-login" type="submit" label="Submit" />
                 </div>
               </form>
             </div>

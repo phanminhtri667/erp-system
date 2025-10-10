@@ -49,9 +49,9 @@ User.init(
     sequelize,
     modelName: 'User',
     tableName: 'users',
-    schema: 'system',  // Quan trọng vì bạn lưu trong schema system
+    schema: 'system', // Quan trọng vì bạn lưu trong schema system
     timestamps: false,
-  }
+  },
 );
 
 export default User;

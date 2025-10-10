@@ -6,6 +6,7 @@
   "scripts": {
     "start": "set PORT=4001 && react-scripts start",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write .",
     "build": "react-scripts build",
     "dev": "react-scripts start",
     "eject": "react-scripts eject"

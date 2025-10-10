@@ -18,7 +18,7 @@ export const toastSlice = createSlice({
       state.detail = action.payload.detail;
       state.life = action.payload.life;
     },
-    hideToast: state => {
+    hideToast: (state) => {
       state.visible = false;
     },
   },

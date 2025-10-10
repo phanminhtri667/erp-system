@@ -1,5 +1,5 @@
-import { DataTypes, Model, Optional } from "sequelize";
-import sequelize from "../../config/database";
+import { DataTypes, Model, Optional } from 'sequelize';
+import sequelize from '../../config/database';
 
 interface ProductAttributes {
   id: number;
@@ -13,7 +13,7 @@ interface ProductAttributes {
   status: boolean;
 }
 
-interface ProductCreationAttributes extends Optional<ProductAttributes, "id"> {}
+interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> {}
 
 class Product
   extends Model<ProductAttributes, ProductCreationAttributes>
@@ -74,11 +74,11 @@ Product.init(
   },
   {
     sequelize,
-    modelName: "Product",
-    tableName: "products",
-    schema: "san_pham",
+    modelName: 'Product',
+    tableName: 'products',
+    schema: 'san_pham',
     timestamps: false,
-  }
+  },
 );
 
 export { Product };

@@ -1,30 +1,23 @@
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
-import IconButton, {
-  EButtonType,
-} from "../../components/forms/button/IconButton";
-import { useState, useCallback, useRef } from "react";
-import { useDropzone } from "react-dropzone";
-import {
-  ICreateProductPayload,
-  productService,
-} from "../../services/productServices";
-import { Toast } from "primereact/toast";
+import { Dropdown } from 'primereact/dropdown';
+import { InputText } from 'primereact/inputtext';
+import IconButton, { EButtonType } from '../../components/forms/button/IconButton';
+import { useState, useCallback, useRef } from 'react';
+import { useDropzone } from 'react-dropzone';
+import { ICreateProductPayload, productService } from '../../services/productServices';
+import { Toast } from 'primereact/toast';
 interface ICategory {
   name: string;
   code: string;
 }
 
 const option: ICategory[] = [
-  { name: "Áo Thun", code: "AT" },
-  { name: "Quần Dài", code: "QD" },
-  { name: "Quần Short", code: "QS" },
+  { name: 'Áo Thun', code: 'AT' },
+  { name: 'Quần Dài', code: 'QD' },
+  { name: 'Quần Short', code: 'QS' },
 ];
 
 export const ProductForm = () => {
-  const [categorySelected, setCategorySelected] = useState<ICategory | null>(
-    null
-  );
+  const [categorySelected, setCategorySelected] = useState<ICategory | null>(null);
   const [imageBase64, setImageBase64] = useState<Base64URLString | null>(null);
 
   const toast = useRef<Toast | null>(null);
@@ -43,7 +36,7 @@ export const ProductForm = () => {
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: { "image/*": [] },
+    accept: { 'image/*': [] },
     multiple: false,
     onDrop,
   });
@@ -59,15 +52,15 @@ export const ProductForm = () => {
       ...data,
       category: categorySelected.code,
       images: [imageBase64],
-      supplier_item_code: "test_supplier_item_code",
+      supplier_item_code: 'test_supplier_item_code',
     } as ICreateProductPayload;
 
     const result = await productService.createProduct(payload);
     if (result) {
       toast.current?.show({
-        severity: "success",
-        summary: "Success",
-        detail: "Product created successfully",
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Product created successfully',
         life: 1500,
       });
     }
@@ -75,13 +68,8 @@ export const ProductForm = () => {
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
-        className="p-6 bg-white rounded-2xl shadow-md"
-      >
-        <h2 className="text-2xl font-semibold mb-6 text-gray-800">
-          Create Product
-        </h2>
+      <form onSubmit={handleSubmit} className="p-6 bg-white rounded-2xl shadow-md">
+        <h2 className="text-2xl font-semibold mb-6 text-gray-800">Create Product</h2>
 
         <div className="flex flex-col gap-y-6">
           {/* Hàng 1 */}
@@ -126,8 +114,8 @@ export const ProductForm = () => {
             {...getRootProps()}
             className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition ${
               isDragActive
-                ? "border-purple-500 bg-purple-50"
-                : "border-gray-300 bg-gray-50 hover:bg-gray-100"
+                ? 'border-purple-500 bg-purple-50'
+                : 'border-gray-300 bg-gray-50 hover:bg-gray-100'
             }`}
           >
             <input {...getInputProps()} />
@@ -143,8 +131,8 @@ export const ProductForm = () => {
             ) : (
               <p className="text-gray-500">
                 {isDragActive
-                  ? "Thả ảnh vào đây..."
-                  : "Kéo & thả ảnh vào đây hoặc click để chọn ảnh"}
+                  ? 'Thả ảnh vào đây...'
+                  : 'Kéo & thả ảnh vào đây hoặc click để chọn ảnh'}
               </p>
             )}
           </div>

@@ -11,10 +11,13 @@ interface ProductSupplierMapAttributes {
   lead_time_days: number;
 }
 
-interface ProductSupplierMapCreationAttributes extends Optional<ProductSupplierMapAttributes, 'id'> {}
+interface ProductSupplierMapCreationAttributes
+  extends Optional<ProductSupplierMapAttributes, 'id'> {}
 
-class ProductSupplierMap extends Model<ProductSupplierMapAttributes, ProductSupplierMapCreationAttributes>
-  implements ProductSupplierMapAttributes {
+class ProductSupplierMap
+  extends Model<ProductSupplierMapAttributes, ProductSupplierMapCreationAttributes>
+  implements ProductSupplierMapAttributes
+{
   public id!: number;
   public product_id!: number;
   public supplier_id!: number;
@@ -61,7 +64,7 @@ ProductSupplierMap.init(
     tableName: 'product_supplier_map',
     schema: 'san_pham',
     timestamps: false,
-  }
+  },
 );
 
 export { ProductSupplierMap };

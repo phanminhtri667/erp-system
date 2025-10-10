@@ -1,10 +1,9 @@
-
 const apiUrl = {
   employee: {
-    index: "api/employees",   
+    index: 'api/employees',
   },
   auth: {
-    login: "auth/login",
+    login: 'auth/login',
   },
   notification: {
     index: `notification`,
@@ -15,7 +14,6 @@ const apiUrl = {
   product: {
     index: `api/products`,
   },
-  
 };
 
 export default apiUrl;

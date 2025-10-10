@@ -1,9 +1,9 @@
-import { Outlet } from "react-router-dom";
-import Sidebar from "../components/sidebar/Sidebar";
-import Header from "../components/header/Header";
-import "./DefaultLayout.scss";
-import Footer from "../components/footer/Footer";
-import Breadcrumb from "../components/breadcrumb/Breadcrumb";
+import { Outlet } from 'react-router-dom';
+import Sidebar from '../components/sidebar/Sidebar';
+import Header from '../components/header/Header';
+import './DefaultLayout.scss';
+import Footer from '../components/footer/Footer';
+import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 
 const DefaultLayout = () => {
   return (

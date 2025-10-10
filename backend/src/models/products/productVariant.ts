@@ -13,8 +13,10 @@ interface ProductVariantAttributes {
 
 interface ProductVariantCreationAttributes extends Optional<ProductVariantAttributes, 'id'> {}
 
-class ProductVariant extends Model<ProductVariantAttributes, ProductVariantCreationAttributes>
-  implements ProductVariantAttributes {
+class ProductVariant
+  extends Model<ProductVariantAttributes, ProductVariantCreationAttributes>
+  implements ProductVariantAttributes
+{
   public id!: number;
   public product_id!: number;
   public sku!: string;
@@ -63,7 +65,7 @@ ProductVariant.init(
     tableName: 'product_variants',
     schema: 'san_pham',
     timestamps: false,
-  }
+  },
 );
 
 export { ProductVariant };

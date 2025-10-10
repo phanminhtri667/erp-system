@@ -1,5 +1,5 @@
-import React, { ChangeEvent } from "react";
-import "./selectField.scss";
+import React, { ChangeEvent } from 'react';
+import './selectField.scss';
 
 type Props = {
   name: string;
@@ -24,28 +24,20 @@ const SelectField: React.FC<Props> = ({
   errorMessage,
   className,
   isDisabled = false,
-  labelKey = "value",
-  valueKey = "id",
-  placeholder = `Choose ${name?.toLowerCase?.() || "option"}`,
+  labelKey = 'value',
+  valueKey = 'id',
+  placeholder = `Choose ${name?.toLowerCase?.() || 'option'}`,
 }) => {
-  const currentValue = value == null ? "" : value;
+  const currentValue = value == null ? '' : value;
 
   // Chuẩn hóa options -> {value, label}
   const options = Array.isArray(data)
     ? data.map((item) => {
-        if (typeof item === "string" || typeof item === "number") {
+        if (typeof item === 'string' || typeof item === 'number') {
           return { value: item, label: String(item) };
         }
-        const v =
-          item?.[valueKey] ??
-          item?.id ??
-          item?.code ??
-          ""; // fallback
-        const l =
-          item?.[labelKey] ??
-          item?.value ??
-          item?.name ??
-          String(v);
+        const v = item?.[valueKey] ?? item?.id ?? item?.code ?? ''; // fallback
+        const l = item?.[labelKey] ?? item?.value ?? item?.name ?? String(v);
         return { value: v, label: l };
       })
     : [];
@@ -53,12 +45,10 @@ const SelectField: React.FC<Props> = ({
   return (
     <>
       {name && <label className="select-label fs-s">{name}</label>}
-      {errorMessage && (
-        <span className="fs-s error-text ml-1">{errorMessage}</span>
-      )}
+      {errorMessage && <span className="fs-s error-text ml-1">{errorMessage}</span>}
 
       <select
-        className={`select-field ${className || ""}`}
+        className={`select-field ${className || ''}`}
         value={currentValue}
         onChange={onChange}
         disabled={isDisabled}

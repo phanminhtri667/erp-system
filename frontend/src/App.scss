@@ -22,7 +22,6 @@ select {
   &:hover {
     color: #fff;
     background-color: $color-purple-500;
-
   }
 }
 
@@ -53,7 +52,6 @@ select {
 
 .fs-xs {
   font-size: $font-size-xs;
-
 }
 
 .fs-s {
@@ -184,7 +182,6 @@ select {
   margin-bottom: 1.25rem;
 }
 
-
 //padding
 .pl-1 {
   padding-left: 0.25rem;
@@ -273,15 +270,15 @@ select {
 }
 
 .text-error {
-  color: $color-red-500
+  color: $color-red-500;
 }
 
 .float-left {
-  float: left
+  float: left;
 }
 
 .float-right {
-  float: right
+  float: right;
 }
 
 @keyframes spin {

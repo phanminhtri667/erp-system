@@ -1,8 +1,8 @@
-import { Button } from "primereact/button";
+import { Button } from 'primereact/button';
 
 export enum EButtonType {
-  Submit = "submit",
-  Cancel = "cancel",
+  Submit = 'submit',
+  Cancel = 'cancel',
 }
 
 interface IIconButtonProps {
@@ -17,11 +17,11 @@ const IconButton = ({ ...props }: IIconButtonProps) => {
   return (
     <Button
       label={label}
-      icon={type === EButtonType.Submit ? "pi pi-check" : "pi pi-times"}
+      icon={type === EButtonType.Submit ? 'pi pi-check' : 'pi pi-times'}
       className={`px-4 py-2 ${className} ${
-        type === EButtonType.Submit ? "bg-primary" : "bg-gray-500"
+        type === EButtonType.Submit ? 'bg-primary' : 'bg-gray-500'
       }`}
-      style={{ color: "white" }}
+      style={{ color: 'white' }}
       disabled={disabled}
     />
   );
