@@ -1,9 +1,9 @@
-import { useState, useRef } from "react";
-import { Toast } from "primereact/toast";
-import InputField from "../../../components/forms/input/InputField";
-import Button from "../../../components/forms/button/Button";
-import AxiosInstance from "../../../services/axios";
-import apiUrl from "../../../constant/apiUrl";
+import { useState, useRef } from 'react';
+import { Toast } from 'primereact/toast';
+import InputField from '../../../components/forms/input/InputField';
+import Button from '../../../components/forms/button/Button';
+import AxiosInstance from '../../../services/axios';
+import apiUrl from '../../../constant/apiUrl';
 
 // ✅ Kiểu dữ liệu form
 interface EmployeeForm {
@@ -21,16 +21,16 @@ interface EmployeeForm {
 
 // ✅ Biến khởi tạo ban đầu cho form
 const initialForm: EmployeeForm = {
-  name: "",
-  dob: "",
-  phone: "",
-  address: "",
-  tax_no: "",
-  bank_name: "",
-  account_no: "",
-  joined_date: "",
-  seniority_years: "",
-  total_salary_paid: "",
+  name: '',
+  dob: '',
+  phone: '',
+  address: '',
+  tax_no: '',
+  bank_name: '',
+  account_no: '',
+  joined_date: '',
+  seniority_years: '',
+  total_salary_paid: '',
 };
 
 const EmployeeCreate = ({ onSuccess }: { onSuccess?: () => void }) => {
@@ -55,9 +55,9 @@ const EmployeeCreate = ({ onSuccess }: { onSuccess?: () => void }) => {
       await AxiosInstance.post(apiUrl.employee.index, payload);
 
       toast.current?.show({
-        severity: "success",
-        summary: "Success",
-        detail: "Employee created successfully",
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Employee created successfully',
         life: 1500,
       });
 
@@ -65,9 +65,9 @@ const EmployeeCreate = ({ onSuccess }: { onSuccess?: () => void }) => {
       onSuccess?.(); // ✅ Gọi callback nếu có
     } catch {
       toast.current?.show({
-        severity: "error",
-        summary: "Error",
-        detail: "Failed to create employee",
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to create employee',
         life: 1500,
       });
     }
@@ -96,11 +96,21 @@ const EmployeeCreate = ({ onSuccess }: { onSuccess?: () => void }) => {
       </div>
 
       <div className="form-item">
-        <InputField name="address" placeholder="Address" value={form.address} onChange={handleChange} />
+        <InputField
+          name="address"
+          placeholder="Address"
+          value={form.address}
+          onChange={handleChange}
+        />
       </div>
 
       <div className="form-item">
-        <InputField name="tax_no" placeholder="Tax number" value={form.tax_no} onChange={handleChange} />
+        <InputField
+          name="tax_no"
+          placeholder="Tax number"
+          value={form.tax_no}
+          onChange={handleChange}
+        />
       </div>
 
       <div className="form-item">

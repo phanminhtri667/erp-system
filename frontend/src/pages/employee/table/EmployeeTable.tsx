@@ -1,10 +1,10 @@
-import "primeicons/primeicons.css";
-import { Link } from "react-router-dom";
-import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { Toast } from "primereact/toast";
-import { useRef } from "react";
-import AxiosInstance from "../../../services/axios";
-import apiUrl from "../../../constant/apiUrl";
+import 'primeicons/primeicons.css';
+import { Link } from 'react-router-dom';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { Toast } from 'primereact/toast';
+import { useRef } from 'react';
+import AxiosInstance from '../../../services/axios';
+import apiUrl from '../../../constant/apiUrl';
 
 type Props = {
   data: any[];
@@ -20,16 +20,16 @@ const EmployeeTable = ({ data, onDelete, onSelect }: Props) => {
       await AxiosInstance.delete(`${apiUrl.employee.index}/${id}`);
       onDelete?.();
       toast.current?.show({
-        severity: "success",
-        summary: "Success",
-        detail: "Employee deleted successfully",
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Employee deleted successfully',
         life: 1500,
       });
     } catch {
       toast.current?.show({
-        severity: "error",
-        summary: "Error",
-        detail: "Delete failed",
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Delete failed',
         life: 1500,
       });
     }
@@ -38,9 +38,9 @@ const EmployeeTable = ({ data, onDelete, onSelect }: Props) => {
   const confirmDelete = (emp: any) => {
     confirmDialog({
       message: `Do you want to delete employee ${emp.name}?`,
-      header: "Delete Confirmation",
-      icon: "pi pi-info-circle",
-      acceptClassName: "p-button-danger",
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptClassName: 'p-button-danger',
       accept: () => deleteEmployee(emp.id),
     });
   };
@@ -78,7 +78,7 @@ const EmployeeTable = ({ data, onDelete, onSelect }: Props) => {
                 </td>
                 <td>{e.joined_date}</td>
                 <td>{e.seniority_years}</td>
-                <td>{Number(e.total_salary_paid).toLocaleString("vi-VN")}</td>
+                <td>{Number(e.total_salary_paid).toLocaleString('vi-VN')}</td>
                 <td>
                   <div className="table-acction">
                     <Link to="#">
@@ -99,7 +99,7 @@ const EmployeeTable = ({ data, onDelete, onSelect }: Props) => {
           ) : (
             <tr>
               <td colSpan={9}>
-                <p style={{ textAlign: "center" }}>No data</p>
+                <p style={{ textAlign: 'center' }}>No data</p>
               </td>
             </tr>
           )}

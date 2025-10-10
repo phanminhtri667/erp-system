@@ -1,7 +1,7 @@
-import { useState } from "react";
-import logo from "../../assets/images/icons8-logo.svg";
-import Login from "../login/login";
-import "./landingPage.scss";
+import { useState } from 'react';
+import logo from '../../assets/images/icons8-logo.svg';
+import Login from '../login/login';
+import './landingPage.scss';
 
 const LandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -9,27 +9,27 @@ const LandingPage = () => {
   const products = [
     {
       id: 1,
-      name: "Áo khoác bomber phối túi sọc vải dù",
+      name: 'Áo khoác bomber phối túi sọc vải dù',
       price: 670000,
-      image_url: "https://tamanh.net/wp-content/uploads/2022/08/vai-len-la-gi.jpg",
+      image_url: 'https://tamanh.net/wp-content/uploads/2022/08/vai-len-la-gi.jpg',
     },
     {
       id: 2,
-      name: "Áo khoác cổ đứng phối 2 màu, vải dù",
+      name: 'Áo khoác cổ đứng phối 2 màu, vải dù',
       price: 560000,
-      image_url: "https://kenh14cdn.com/2020/7/17/brvn-15950048783381206275371.jpg",
+      image_url: 'https://kenh14cdn.com/2020/7/17/brvn-15950048783381206275371.jpg',
     },
     {
       id: 3,
-      name: "Áo khoác cổ đứng phối túi dù, vải nhung",
+      name: 'Áo khoác cổ đứng phối túi dù, vải nhung',
       price: 540000,
-      image_url: "https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg",
+      image_url: 'https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg',
     },
     {
       id: 4,
-      name: "Áo khoác cổ đứng phối túi hộp, vải ni phối dù",
+      name: 'Áo khoác cổ đứng phối túi hộp, vải ni phối dù',
       price: 580000,
-      image_url: "https://vaiphelieu.com/wp-content/uploads/2023/05/vai-len-2.jpeg",
+      image_url: 'https://vaiphelieu.com/wp-content/uploads/2023/05/vai-len-2.jpeg',
     },
   ];
 
@@ -58,10 +58,7 @@ const LandingPage = () => {
             <button className="icon-btn">
               <i className="fas fa-search"></i>
             </button>
-            <button
-              className="login-btn"
-              onClick={() => setShowLogin(true)}
-            >
+            <button className="login-btn" onClick={() => setShowLogin(true)}>
               Đăng nhập
             </button>
           </div>
@@ -77,7 +74,7 @@ const LandingPage = () => {
             </div>
             <div className="product-info">
               <h3>{product.name}</h3>
-              <p className="price">{product.price.toLocaleString("vi-VN")}₫</p>
+              <p className="price">{product.price.toLocaleString('vi-VN')}₫</p>
             </div>
           </div>
         ))}

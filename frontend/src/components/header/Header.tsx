@@ -1,25 +1,23 @@
 // frontend/src/components/header/Header.tsx
-import { faBell, faEnvelope, faUser } from "@fortawesome/free-solid-svg-icons";
-import InputField from "../forms/input/InputField";
-import "./Header.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Card } from "primereact/card";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../../redux/features/authSlice";
-import AxiosInstance from "../../services/axios";
-import apiUrl from "../../constant/apiUrl";
-import { useNavigate } from "react-router-dom";
+import { faBell, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
+import InputField from '../forms/input/InputField';
+import './Header.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Card } from 'primereact/card';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/features/authSlice';
+import AxiosInstance from '../../services/axios';
+import apiUrl from '../../constant/apiUrl';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [isOpenNotification, setIsOpenNotification] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
-  const [dataNotifiCation, setDataNotification] = useState<
-    Record<string, any>[]
-  >([]);
+  const [dataNotifiCation, setDataNotification] = useState<Record<string, any>[]>([]);
   const dispatch = useDispatch();
-  console.log("dataNotifiCation", dataNotifiCation);
+  console.log('dataNotifiCation', dataNotifiCation);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,19 +39,18 @@ const Header = () => {
   //   }
   // };
   const getNotification = async () => {
-  try {
-    const res = await AxiosInstance.get("/api/notification");
-    setDataNotification(res.data.data || []);
-  } catch (error) {
-    console.error("Lỗi khi gọi API notification:", error);
-  }
-};
-
+    try {
+      const res = await AxiosInstance.get('/api/notification');
+      setDataNotification(res.data.data || []);
+    } catch (error) {
+      console.error('Lỗi khi gọi API notification:', error);
+    }
+  };
 
   const handleSignOut = () => {
     localStorage.clear();
     dispatch(logout());
-    navigate("/")
+    navigate('/');
   };
 
   const handleNotificationClick = () => {
@@ -91,9 +88,7 @@ const Header = () => {
                     setShowNotification(false);
                   }}
                 />
-                {showNotification && (
-                  <div className="header-menu-icon-bell-notification"></div>
-                )}
+                {showNotification && <div className="header-menu-icon-bell-notification"></div>}
               </div>
             </div>
             <div className="header-menu-icon-item pointer user">
@@ -105,9 +100,7 @@ const Header = () => {
                 }}
               />
               {isOpenDropdown && (
-                <div
-                  className="dropdown z-999"
-                  onMouseLeave={() => setIsOpenDropdown(false)}>
+                <div className="dropdown z-999" onMouseLeave={() => setIsOpenDropdown(false)}>
                   <Card>
                     <div className="dropdown-content pt-2 pb-2">
                       <div className="item pointer ml-2 mr-2 pt-2 pb-2">
@@ -133,7 +126,8 @@ const Header = () => {
                       </div>
                       <div
                         className="item pointer ml-2 mr-2 pt-2 pb-2"
-                        onClick={() => handleSignOut()}>
+                        onClick={() => handleSignOut()}
+                      >
                         <i className="pi pi-sign-out mr-2 pt-2 pb-2"></i>
                         <span>Sign out</span>
                       </div>
@@ -142,9 +136,7 @@ const Header = () => {
                 </div>
               )}
               {isOpenNotification && (
-                <div
-                  className="dropdown z-999"
-                  onMouseLeave={() => setIsOpenNotification(false)}>
+                <div className="dropdown z-999" onMouseLeave={() => setIsOpenNotification(false)}>
                   <Card>
                     <div className="notification-content pt-2 pb-2">
                       {dataNotifiCation.length == 0 ? (
@@ -154,10 +146,8 @@ const Header = () => {
                       ) : (
                         <div>
                           {dataNotifiCation.map((item, index) => (
-                            <span
-                              key={index}
-                              className="notification-content-item line-clamp-1">
-                              {item["message"]}
+                            <span key={index} className="notification-content-item line-clamp-1">
+                              {item['message']}
                             </span>
                           ))}
                         </div>

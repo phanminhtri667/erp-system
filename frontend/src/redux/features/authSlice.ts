@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type User = {
   id: number;
@@ -14,25 +14,25 @@ type AuthState = {
 };
 
 // 👉 Lấy sẵn user từ localStorage khi app khởi động (để F5 không bị logout)
-const savedUser = localStorage.getItem("user");
+const savedUser = localStorage.getItem('user');
 const initialState: AuthState = {
   isAuthenticated: !!savedUser,
   user: savedUser ? JSON.parse(savedUser) : null,
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     setUser(state, action: PayloadAction<User>) {
       state.isAuthenticated = true;
       state.user = action.payload;
-      localStorage.setItem("user", JSON.stringify(action.payload));
+      localStorage.setItem('user', JSON.stringify(action.payload));
     },
     logout(state) {
       state.isAuthenticated = false;
       state.user = null;
-      localStorage.removeItem("user");
+      localStorage.removeItem('user');
     },
   },
 });

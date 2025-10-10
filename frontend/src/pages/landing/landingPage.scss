@@ -1,8 +1,8 @@
-@import "../../assets/css/variables.scss";
+@import '../../assets/css/variables.scss';
 
 .product-page {
   background-color: $color-grey-50;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   color: $color-grey-900;
   min-height: 100vh;
   display: flex;
@@ -104,7 +104,9 @@
       box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
       overflow: hidden;
       text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
       width: 100%;
       max-width: 280px;
 
@@ -179,128 +181,136 @@
 
     // popup chính giữa
     // popup chính giữa
-.login-popup {
-  position: relative;
-  z-index: 2100;
-  width: 400px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
-  padding: 2rem;
-  animation: zoomIn 0.25s ease-out;
-  overflow: hidden;
+    .login-popup {
+      position: relative;
+      z-index: 2100;
+      width: 400px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+      padding: 2rem;
+      animation: zoomIn 0.25s ease-out;
+      overflow: hidden;
 
-  // nút đóng
-  .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 14px;
-    font-size: 1.2rem;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    color: $color-grey-400;
-    transition: color 0.2s ease;
-    &:hover {
-      color: $color-purple-400;
-    }
-  }
+      // nút đóng
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        font-size: 1.2rem;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        color: $color-grey-400;
+        transition: color 0.2s ease;
+        &:hover {
+          color: $color-purple-400;
+        }
+      }
 
-  // chỉ ghi đè layout login khi trong popup
-  .login {
-    background: transparent;
-    min-height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .login-card {
-      width: 100%;
-      box-shadow: none;
-      border: none;
-      background: transparent;
-
-      .login-content {
+      // chỉ ghi đè layout login khi trong popup
+      .login {
+        background: transparent;
+        min-height: auto;
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        padding: 0;
 
-        .card-logo img {
-          width: 50px;
-          height: 50px;
-          margin-bottom: 0.5rem;
-        }
-
-        .card-form {
+        .login-card {
           width: 100%;
-          .form-item {
-            width: 100%;
-            margin-bottom: -1.8rem;
-          }
+          box-shadow: none;
+          border: none;
+          background: transparent;
 
-          input {
-            width: 100%;
-            height: 38px;
-            border-radius: 6px;
-            padding: 0 0.75rem;
-            border: 1px solid $color-grey-200;
-            font-size: $font-size-m;
-            transition: border-color 0.2s;
-            &:focus {
-              outline: none;
-              border-color: $color-purple-400;
+          .login-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+
+            .card-logo img {
+              width: 50px;
+              height: 50px;
+              margin-bottom: 0.5rem;
             }
-          }
 
-          .btn-login {
-            width: 100%;
-            height: 38px;
-            background-color: $color-purple-400;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            &:hover {
-              background-color: darken($color-purple-400, 8%);
+            .card-form {
+              width: 100%;
+              .form-item {
+                width: 100%;
+                margin-bottom: -1.8rem;
+              }
+
+              input {
+                width: 100%;
+                height: 38px;
+                border-radius: 6px;
+                padding: 0 0.75rem;
+                border: 1px solid $color-grey-200;
+                font-size: $font-size-m;
+                transition: border-color 0.2s;
+                &:focus {
+                  outline: none;
+                  border-color: $color-purple-400;
+                }
+              }
+
+              .btn-login {
+                width: 100%;
+                height: 38px;
+                background-color: $color-purple-400;
+                color: #fff;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background 0.3s ease;
+                &:hover {
+                  background-color: darken($color-purple-400, 8%);
+                }
+              }
+
+              .text-error {
+                color: #e74c3c;
+                text-align: center;
+                font-size: 0.9rem;
+              }
             }
-          }
 
-          .text-error {
-            color: #e74c3c;
-            text-align: center;
-            font-size: 0.9rem;
-          }
-        }
-
-        .flex-center {
-          margin-top: 1rem;
-          font-size: $font-size-s;
-          color: $color-grey-400;
-          text-align: center;
-          .signup {
-            color: $color-purple-400;
-            font-weight: 500;
-            margin-left: 4px;
+            .flex-center {
+              margin-top: 1rem;
+              font-size: $font-size-s;
+              color: $color-grey-400;
+              text-align: center;
+              .signup {
+                color: $color-purple-400;
+                font-weight: 500;
+                margin-left: 4px;
+              }
+            }
           }
         }
       }
     }
-  }
-}
-
 
     @keyframes fadeInOverlay {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes zoomIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
   }
-
 }

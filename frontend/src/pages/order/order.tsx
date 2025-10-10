@@ -1,10 +1,10 @@
-import "./order.scss";
-import DefaultLayout from "../../layouts/DefaultLayout";
-import { Card } from "primereact/card";
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
-import { InputNumber } from "primereact/inputnumber";
-import { useState } from "react";
+import './order.scss';
+import DefaultLayout from '../../layouts/DefaultLayout';
+import { Card } from 'primereact/card';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { InputNumber } from 'primereact/inputnumber';
+import { useState } from 'react';
 
 interface ProductRow {
   id: number;
@@ -23,40 +23,40 @@ interface ProductRow {
 
 const OrderPage = () => {
   const [customerInfo, setCustomerInfo] = useState({
-    name: "",
-    address: "",
-    tax: "",
-    phone: "",
-    email: "",
-    invoice: "Có",
+    name: '',
+    address: '',
+    tax: '',
+    phone: '',
+    email: '',
+    invoice: 'Có',
   });
 
   const [products, setProducts] = useState<ProductRow[]>([
     {
       id: 1,
-      code: "A001",
-      name: "Áo trắng",
-      image: "/shirt1.png",
-      color: "Trắng",
-      size: "L",
+      code: 'A001',
+      name: 'Áo trắng',
+      image: '/shirt1.png',
+      color: 'Trắng',
+      size: 'L',
       qty_order: 10,
       qty_received: 10,
       price: 300000,
       discount: 0,
-      note: "-",
+      note: '-',
     },
     {
       id: 2,
-      code: "A002",
-      name: "Áo vàng",
-      image: "/shirt2.png",
-      color: "Vàng",
-      size: "M",
+      code: 'A002',
+      name: 'Áo vàng',
+      image: '/shirt2.png',
+      color: 'Vàng',
+      size: 'M',
       qty_order: 5,
       qty_received: 5,
       price: 250000,
       discount: 0,
-      note: "-",
+      note: '-',
     },
   ]);
 
@@ -68,16 +68,16 @@ const OrderPage = () => {
   const handleAddRow = () => {
     const newRow: ProductRow = {
       id: products.length + 1,
-      code: "",
-      name: "",
-      image: "",
-      color: "",
-      size: "",
+      code: '',
+      name: '',
+      image: '',
+      color: '',
+      size: '',
       qty_order: 0,
       qty_received: 0,
       price: 0,
       discount: 0,
-      note: "",
+      note: '',
       isEditing: true, // cho phép nhập ngay
     };
     setProducts([...products, newRow]);
@@ -88,36 +88,29 @@ const OrderPage = () => {
   };
 
   const handleEditRow = (id: number) => {
-    setProducts(
-      products.map((p) => (p.id === id ? { ...p, isEditing: true } : p))
-    );
+    setProducts(products.map((p) => (p.id === id ? { ...p, isEditing: true } : p)));
   };
 
   const handleSaveRow = (id: number) => {
-    setProducts(
-      products.map((p) => (p.id === id ? { ...p, isEditing: false } : p))
-    );
+    setProducts(products.map((p) => (p.id === id ? { ...p, isEditing: false } : p)));
   };
 
   const handleProductChange = (id: number, field: string, value: any) => {
-    setProducts(
-      products.map((p) => (p.id === id ? { ...p, [field]: value } : p))
-    );
+    setProducts(products.map((p) => (p.id === id ? { ...p, [field]: value } : p)));
   };
 
   const formatCurrency = (value: number) =>
-    value.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
+    value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
 
   const totalAmount = products.reduce(
-    (acc, item) =>
-      acc + item.price * item.qty_order * (1 - item.discount / 100),
-    0
+    (acc, item) => acc + item.price * item.qty_order * (1 - item.discount / 100),
+    0,
   );
 
   const handleSubmit = () => {
-    console.log("Thông tin khách hàng:", customerInfo);
-    console.log("Chi tiết sản phẩm:", products);
-    alert("✅ Đơn hàng đã được xác nhận!");
+    console.log('Thông tin khách hàng:', customerInfo);
+    console.log('Chi tiết sản phẩm:', products);
+    alert('✅ Đơn hàng đã được xác nhận!');
   };
 
   return (
@@ -245,88 +238,66 @@ const OrderPage = () => {
                     <td>
                       <InputText
                         value={item.code}
-                        onChange={(e) =>
-                          handleProductChange(item.id, "code", e.target.value)
-                        }
+                        onChange={(e) => handleProductChange(item.id, 'code', e.target.value)}
                       />
                     </td>
                     <td>
                       <InputText
                         value={item.name}
-                        onChange={(e) =>
-                          handleProductChange(item.id, "name", e.target.value)
-                        }
+                        onChange={(e) => handleProductChange(item.id, 'name', e.target.value)}
                       />
                     </td>
                     <td>
                       <InputText
                         value={item.image}
-                        onChange={(e) =>
-                          handleProductChange(item.id, "image", e.target.value)
-                        }
+                        onChange={(e) => handleProductChange(item.id, 'image', e.target.value)}
                         placeholder="/shirt.png"
                       />
                     </td>
                     <td>
                       <InputText
                         value={item.color}
-                        onChange={(e) =>
-                          handleProductChange(item.id, "color", e.target.value)
-                        }
+                        onChange={(e) => handleProductChange(item.id, 'color', e.target.value)}
                       />
                     </td>
                     <td>
                       <InputText
                         value={item.size}
-                        onChange={(e) =>
-                          handleProductChange(item.id, "size", e.target.value)
-                        }
+                        onChange={(e) => handleProductChange(item.id, 'size', e.target.value)}
                       />
                     </td>
                     <td>
                       <InputNumber
                         value={item.qty_order}
-                        onValueChange={(e) =>
-                          handleProductChange(item.id, "qty_order", e.value)
-                        }
+                        onValueChange={(e) => handleProductChange(item.id, 'qty_order', e.value)}
                       />
                     </td>
                     <td>
                       <InputNumber
                         value={item.qty_received}
-                        onValueChange={(e) =>
-                          handleProductChange(item.id, "qty_received", e.value)
-                        }
+                        onValueChange={(e) => handleProductChange(item.id, 'qty_received', e.value)}
                       />
                     </td>
                     <td>
                       <InputNumber
                         value={item.price}
-                        onValueChange={(e) =>
-                          handleProductChange(item.id, "price", e.value)
-                        }
+                        onValueChange={(e) => handleProductChange(item.id, 'price', e.value)}
                       />
                     </td>
                     <td>
                       <InputNumber
                         value={item.discount}
-                        onValueChange={(e) =>
-                          handleProductChange(item.id, "discount", e.value)
-                        }
+                        onValueChange={(e) => handleProductChange(item.id, 'discount', e.value)}
                         suffix="%"
                       />
                     </td>
                     <td>
-                      {formatCurrency(
-                        item.price * item.qty_order * (1 - item.discount / 100)
-                      )}
+                      {formatCurrency(item.price * item.qty_order * (1 - item.discount / 100))}
                     </td>
                     <td>
                       <InputText
                         value={item.note}
-                        onChange={(e) =>
-                          handleProductChange(item.id, "note", e.target.value)
-                        }
+                        onChange={(e) => handleProductChange(item.id, 'note', e.target.value)}
                       />
                     </td>
                     <td>
@@ -348,13 +319,9 @@ const OrderPage = () => {
                     <td>{item.name}</td>
                     <td>
                       {item.image ? (
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="thumb"
-                        />
+                        <img src={item.image} alt={item.name} className="thumb" />
                       ) : (
-                        "-"
+                        '-'
                       )}
                     </td>
                     <td>{item.color}</td>
@@ -364,9 +331,7 @@ const OrderPage = () => {
                     <td>{formatCurrency(item.price)}</td>
                     <td>{item.discount}%</td>
                     <td>
-                      {formatCurrency(
-                        item.price * item.qty_order * (1 - item.discount / 100)
-                      )}
+                      {formatCurrency(item.price * item.qty_order * (1 - item.discount / 100))}
                     </td>
                     <td>{item.note}</td>
                     <td>
@@ -389,11 +354,7 @@ const OrderPage = () => {
         </table>
 
         <div className="mt-3 text-right">
-          <Button
-            label="+ Thêm sản phẩm"
-            className="p-button-outlined"
-            onClick={handleAddRow}
-          />
+          <Button label="+ Thêm sản phẩm" className="p-button-outlined" onClick={handleAddRow} />
         </div>
       </Card>
 
