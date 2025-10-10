@@ -63,33 +63,29 @@ const ProductTable = ({ data, onDelete, onSelect }: Props) => {
             <th>Available</th>
             <th>Defective</th>
             <th>Sale Price</th>
-            <th>Discount</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {data.length ? (
             data.map((e, i) => (
-              <tr key={e.id}>
+              <tr key={i}>
                 <td>{i + 1}</td>
-                <td>{e.code || e.our_code}</td>
-                <td>{e.name}</td>
+                <td>{e.product_code}</td>
+                <td>{e.product_name}</td>
                 <td>
                   <img
                     className={'max-w-24 border-2 border-indigo-600'}
-                    src={
-                      'https://bizweb.dktcdn.net/100/446/974/products/ao-thun-mlb-new-era-heavy-cotton-new-york-yankees-black-13086578-1.jpg?v=1691318321487'
-                    }
-                    alt={e.name}
-                  />{' '}
+                    src={e.images[0]}
+                    alt={e.product_name}
+                  />
                 </td>
                 <td>{e.category}</td>
-                <td>{e.size || 'M'}</td>
-                <td>{e.color || 'Black'}</td>
+                <td>{e.size}</td>
+                <td>{e.color}</td>
                 <td>{e.available || 0}</td>
                 <td>{e.defective || 0}</td>
                 <td>{e.sale_price || 0}</td>
-                <td>{e.discount ? `${e.discount}%` : '0%'}</td>
                 <td>
                   <div className="table-acction">
                     <Link to="#">
