@@ -1,25 +1,28 @@
-import Product from '../models/products';
+import Product from '../models/product';
 import Category from '../models/category';
 import Size from '../models/size';
 import Color from '../models/color';
+import Material from '../models/material';
 
 class ProductService {
   async getAll() {
     return await Product.findAll({
       include: [
-        { model: Category, as: 'category', attributes: ['id', 'name'] },
-        { model: Size, as: 'size', attributes: ['id', 'name'] },
-        { model: Color, as: 'color', attributes: ['id', 'name'] },
+        { model: Category, as: 'category', attributes: ['category_code', 'category_name'] },
+        { model: Size, as: 'size', attributes: ['size_code', 'size_name'] },
+        { model: Color, as: 'color', attributes: ['color_code', 'color_name'] },
+        { model: Material, as: 'material', attributes: ['material_code', 'material_name'] },
       ],
     });
   }
 
-  async getById(id: number) {
-    return await Product.findByPk(id, {
+  async getByCode(product_code: string) {
+    return await Product.findByPk(product_code, {
       include: [
-        { model: Category, as: 'category', attributes: ['id', 'name'] },
-        { model: Size, as: 'size', attributes: ['id', 'name'] },
-        { model: Color, as: 'color', attributes: ['id', 'name'] },
+        { model: Category, as: 'category', attributes: ['category_code', 'category_name'] },
+        { model: Size, as: 'size', attributes: ['size_code', 'size_name'] },
+        { model: Color, as: 'color', attributes: ['color_code', 'color_name'] },
+        { model: Material, as: 'material', attributes: ['material_code', 'material_name'] },
       ],
     });
   }
@@ -28,14 +31,14 @@ class ProductService {
     return await Product.create(data);
   }
 
-  async update(id: number, data: any) {
-    const product = await Product.findByPk(id);
+  async update(product_code: string, data: any) {
+    const product = await Product.findByPk(product_code);
     if (!product) throw new Error('Product not found');
     return await product.update(data);
   }
 
-  async delete(id: number) {
-    const product = await Product.findByPk(id);
+  async delete(product_code: string) {
+    const product = await Product.findByPk(product_code);
     if (!product) throw new Error('Product not found');
     await product.destroy();
     return true;

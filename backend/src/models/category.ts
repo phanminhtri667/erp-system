@@ -1,30 +1,36 @@
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/database';
 
 interface CategoryAttributes {
-  id: number;
-  name: string;
+  category_code: string;
+  category_name: string;
 }
 
-interface CategoryCreationAttributes extends Optional<CategoryAttributes, 'id'> {}
+interface CategoryCreationAttributes extends CategoryAttributes {}
 
 class Category
   extends Model<CategoryAttributes, CategoryCreationAttributes>
   implements CategoryAttributes
 {
-  public id!: number;
-  public name!: string;
+  public category_code!: string;
+  public category_name!: string;
 }
 
 Category.init(
   {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    name: { type: DataTypes.STRING, allowNull: false },
+    category_code: {
+      type: DataTypes.STRING(100),
+      primaryKey: true,
+    },
+    category_name: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
   },
   {
     sequelize,
     modelName: 'Category',
-    tableName: 'categories',
+    tableName: 'category',
     schema: 'public',
     timestamps: false,
   },
