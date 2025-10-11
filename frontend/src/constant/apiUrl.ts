@@ -1,6 +1,6 @@
 const apiUrl = {
-  employee: {
-    index: 'api/employees',
+  user: {
+    index: 'api/user',
   },
   auth: {
     login: 'auth/login',

@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import LandingPage from './pages/landing/landingPage';
 import DefaultLayout from './layouts/DefaultLayout';
 import Dashboard from './pages/dashboard/dashboard';
-import Employee from './pages/employee/employee';
 import Order from './pages/order/order';
 import Product from './pages/product/product';
+import User from './pages/user/user';
 
 const AppRoutes = () => {
   const isAuthenticated = useSelector((state: any) => state.auth.isAuthenticated);
@@ -20,7 +20,7 @@ const AppRoutes = () => {
       element: isAuthenticated ? <DefaultLayout /> : <Navigate to="/" />,
       children: [
         { path: 'dashboard', element: <Dashboard /> },
-        { path: 'employee', element: <Employee /> },
+        { path: 'user', element: <User /> },
         { path: 'order', element: <Order /> },
         { path: 'product', element: <Product /> },
       ],

@@ -2,10 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import InputField from '../../../components/forms/input/InputField';
 import Button from '../../../components/forms/button/Button';
-import AxiosInstance from '../../../services/axios';
-import apiUrl from '../../../constant/apiUrl';
+import { updateUser } from '../../../services/userService';
 
-const EmployeeUpdate = ({ data, closeModal, getEmployee }: any) => {
+const UserUpdate = ({ data, closeModal, getUser }: any) => {
   const toast = useRef<Toast | null>(null);
   const [form, setForm] = useState<any>(data || {});
 
@@ -20,22 +19,26 @@ const EmployeeUpdate = ({ data, closeModal, getEmployee }: any) => {
   const handleSubmit = async () => {
     try {
       const payload = {
-        ...form,
-        bank_info: {
-          bank_name: form.bank_name,
-          account_no: form.account_no,
-        },
+        user_name: form.user_name,
+        user_phone: form.user_phone,
+        user_email: form.user_email,
+        role_code: form.role_code,
+        password: form.password,
       };
-      await AxiosInstance.put(`${apiUrl.employee.index}/${form.id}`, payload);
+
+      await updateUser(form.user_code, payload);
+
       toast.current?.show({
         severity: 'success',
         summary: 'Success',
-        detail: 'Employee updated successfully',
+        detail: 'User updated successfully',
         life: 1500,
       });
-      getEmployee?.();
-      closeModal();
-    } catch {
+
+      getUser?.(); // reload lại danh sách user
+      closeModal(); // đóng modal
+    } catch (err) {
+      console.error('Error updating user:', err);
       toast.current?.show({
         severity: 'error',
         summary: 'Error',
@@ -50,63 +53,60 @@ const EmployeeUpdate = ({ data, closeModal, getEmployee }: any) => {
   return (
     <div className="form">
       <Toast ref={toast} />
+
+      {/* Full name */}
       <div className="form-item">
         <InputField
-          name="name"
+          name="user_name"
           placeholder="Full name"
-          value={form.name || ''}
+          value={form.user_name || ''}
           onChange={handleChange}
         />
       </div>
+
+      {/* Phone */}
       <div className="form-item">
         <InputField
-          type="date"
-          name="dob"
-          placeholder="Date of birth"
-          value={form.dob || ''}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-item">
-        <InputField
-          name="phone"
+          name="user_phone"
           placeholder="Phone"
-          value={form.phone || ''}
+          value={form.user_phone || ''}
           onChange={handleChange}
         />
       </div>
+
+      {/* Email */}
       <div className="form-item">
         <InputField
-          name="address"
-          placeholder="Address"
-          value={form.address || ''}
+          type="email"
+          name="user_email"
+          placeholder="Email"
+          value={form.user_email || ''}
           onChange={handleChange}
         />
       </div>
+
+      {/* Role Code */}
       <div className="form-item">
         <InputField
-          name="tax_no"
-          placeholder="Tax number"
-          value={form.tax_no || ''}
+          name="role_code"
+          placeholder="Role code"
+          value={form.role_code || ''}
           onChange={handleChange}
         />
       </div>
+
+      {/* Password (optional) */}
       <div className="form-item">
         <InputField
-          name="bank_name"
-          placeholder="Bank name"
-          value={form.bank_info?.bank_name || ''}
+          type="password"
+          name="password"
+          placeholder="New password (leave blank if unchanged)"
+          value={form.password || ''}
           onChange={handleChange}
         />
       </div>
-      <div className="form-item">
-        <InputField
-          name="account_no"
-          placeholder="Account number"
-          value={form.bank_info?.account_no || ''}
-          onChange={handleChange}
-        />
-      </div>
+
+      {/* Buttons */}
       <div className="form-footer float-right">
         <Button label="Submit" onClick={handleSubmit} />
         <Button label="Cancel" className="ml-2" action="cancel" onClick={closeModal} />
@@ -115,4 +115,4 @@ const EmployeeUpdate = ({ data, closeModal, getEmployee }: any) => {
   );
 };
 
-export default EmployeeUpdate;
+export default UserUpdate;

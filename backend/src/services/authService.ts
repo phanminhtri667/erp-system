@@ -3,78 +3,81 @@ import bcrypt from 'bcrypt';
 import User from '../models/user';
 
 interface LoginPayload {
-  email: string;
+  user_email: string;
   password: string;
 }
 interface RegisterPayload {
-  full_name: string;
-  email: string;
-  phone: string;
+  user_name: string;
+  user_email: string;
+  user_phone: string;
   password: string;
-  role_id: number;
+  role_code: string;
 }
 
 class AuthService {
-  // login
-  public async login({ email, password }: LoginPayload) {
-    const user = await User.findOne({ where: { email } });
+  public async login({ user_email, password }: LoginPayload) {
+    const user = await User.findOne({ where: { user_email } });
 
     if (!user) {
       throw new Error('User not found');
     }
 
-    // So sánh password hash
-    const isMatch = await bcrypt.compare(password, user.password_hash);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       throw new Error('Invalid password');
     }
 
-    if (!user.status) {
-      throw new Error('User is inactive');
-    }
-
     return {
-      id: user.id,
-      full_name: user.full_name,
-      email: user.email,
-      role_id: user.role_id,
+      user_code: user.user_code,
+      user_name: user.user_name,
+      user_email: user.user_email,
+      user_phone: user.user_phone,
+      role_code: user.role_code,
     };
   }
 
-  // register
   public async register(payload: RegisterPayload) {
-    const { full_name, email, phone, password, role_id } = payload;
+    const { user_name, user_email, user_phone, password, role_code } = payload;
 
-    // Kiểm tra nếu email đã tồn tại
-    const existingUser = await User.findOne({ where: { email } });
+    const existingUser = await User.findOne({ where: { user_name } });
     if (existingUser) {
       throw new Error('Email already exists');
     }
 
-    // Hash mật khẩu
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    console.log('Hashed password:', hashedPassword); // Đảm bảo mật khẩu đã được mã hóa
+    console.log('Hashed password:', hashedPassword);
 
-    // Tạo người dùng mới
+    
+    const lastUser = await User.findOne({
+      order: [['user_code', 'DESC']],
+    });
+    let newUserCode = 'U001';
+    if (lastUser && lastUser.user_code) {
+      const currentNum = parseInt(lastUser.user_code.replace('U', ''), 10);
+      const nextNum = currentNum + 1;
+      newUserCode = `U${String(nextNum).padStart(3, '0')}`;
+    }
+
     const newUser = await User.create({
-      full_name,
-      email,
-      phone,
-      role_id,
-      status: true,
-      password_hash: hashedPassword,
+      user_code: newUserCode,
+      user_name,
+      user_email,
+      user_phone,
+      role_code,
+      password: hashedPassword, 
+      deleted: false,
     });
 
-    // Trả về thông tin người dùng mới
+ 
     return {
-      id: newUser.id,
-      full_name: newUser.full_name,
-      email: newUser.email,
-      role_id: newUser.role_id,
+      user_code: newUser.user_code,
+      user_name: newUser.user_name,
+      user_email: newUser.user_email,
+      user_phone: newUser.user_phone,
+      role_code: newUser.role_code,
     };
   }
 }
 
-// export một instance để dùng
 export default new AuthService();

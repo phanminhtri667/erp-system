@@ -1,73 +1,75 @@
-import './employee.scss';
-import DefaultLayout from '../../layouts/DefaultLayout';
+// src/pages/user/User.tsx
+import './user.scss';
 import { Card } from 'primereact/card';
 import { TabView, TabPanel } from 'primereact/tabview';
-import EmployeeTable from './table/EmployeeTable';
+import UserTable from './table/UserTable';
 import { useEffect, useRef, useState } from 'react';
-import AxiosInstance from '../../services/axios';
-import apiUrl from '../../constant/apiUrl';
 import { Toast } from 'primereact/toast';
 import { Dialog } from 'primereact/dialog';
-import EmployeeCreate from './form/employeeCreate';
-import EmployeeUpdate from './form/employeeUpdate';
+import UserCreate from './form/userCreate';
+import UserUpdate from './form/userUpdate';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
+import { getAllUsers } from '../../services/userService';
 
-const Employee = () => {
-  const [employeeData, setEmployeeData] = useState<any[]>([]);
+const User = () => {
+  const [userData, setUserData] = useState<any[]>([]);
   const [filtered, setFiltered] = useState<any[]>([]);
   const [q, setQ] = useState<string>('');
-  const [infoDataEmployee, setInfoDataEmployee] = useState<any>({});
-  const [employeeSelected, setEmployeeSelected] = useState<any>({});
+  const [infoDataUser, setInfoDataUser] = useState<any>({});
+  const [userSelected, setUserSelected] = useState<any>({});
   const [visible, setVisible] = useState(false);
   const toast = useRef<Toast | null>(null);
 
-  // Gọi API lấy danh sách nhân viên
   useEffect(() => {
-    getEmployees();
+    getUsers();
   }, []);
 
-  const getEmployees = async () => {
+  const getUsers = async () => {
     try {
-      const res = await AxiosInstance.get(apiUrl.employee.index);
-      const rows = res.data.data || [];
-      setEmployeeData(rows);
-      setFiltered(rows);
-      calcStatistic(rows);
+      const rows = await getAllUsers();
+
+      const mapped = rows.map((u) => ({
+        user_code: u.user_code,
+        user_name: u.user_name,
+        user_phone: u.user_phone,
+        user_email: u.user_email,
+        role_code: u.role_code,
+        created_at: u.created_at,
+      }));
+
+      setUserData(mapped);
+      setFiltered(mapped);
+      calcStatistic(mapped);
     } catch (err) {
-      console.error('Error fetching employees:', err);
+      console.error('Error fetching users:', err);
     }
   };
 
-  // Tính toán thống kê
   const calcStatistic = (data: any[]) => {
     const now = new Date().getTime();
-    const newEmp = data.filter((e) => now - new Date(e.createdAt).getTime() < 24 * 3600 * 1000);
-    const male = data.filter((e) => e.gender === 'male');
-    setInfoDataEmployee({
+    const newUsers = data.filter((u) => now - new Date(u.created_at).getTime() < 24 * 3600 * 1000);
+
+    setInfoDataUser({
       total: data.length,
-      newEmployee: newEmp.length,
-      male: male.length,
-      female: data.length - male.length,
+      newUser: newUsers.length,
     });
   };
 
-  // Tìm kiếm
   const handleSearch = (e: any) => {
     const kw = e.target.value.toLowerCase().trim();
     setQ(kw);
-    if (!kw) return setFiltered(employeeData);
-    setFiltered(employeeData.filter((x) => String(x.employee_id).toLowerCase().includes(kw)));
+    if (!kw) return setFiltered(userData);
+    setFiltered(userData.filter((x) => String(x.user_code).toLowerCase().includes(kw)));
   };
 
   const clearSearch = () => {
     setQ('');
-    setFiltered(employeeData);
+    setFiltered(userData);
   };
 
-  // Mở popup sửa nhân viên
-  const handleSelect = (emp: any) => {
-    setEmployeeSelected(emp);
+  const handleSelect = (user: any) => {
+    setUserSelected(user);
     setVisible(true);
   };
 
@@ -82,27 +84,25 @@ const Employee = () => {
               <Card>
                 <div className="card-body pointer">
                   <span className="card-body-name fs-l">Total Employee</span>
-                  <span className="card-body-content fs-2xl">{infoDataEmployee.total || 0}</span>
+                  <span className="card-body-content fs-2xl">{infoDataUser.total || 0}</span>
                 </div>
               </Card>
               <Card>
                 <div className="card-body pointer">
                   <span className="card-body-name fs-l">New Employee</span>
-                  <span className="card-body-content fs-2xl">
-                    {infoDataEmployee.newEmployee || 0}
-                  </span>
+                  <span className="card-body-content fs-2xl">{infoDataUser.newEmployee || 0}</span>
                 </div>
               </Card>
               <Card>
                 <div className="card-body pointer">
                   <span className="card-body-name fs-l">Male</span>
-                  <span className="card-body-content fs-2xl">{infoDataEmployee.male || 0}</span>
+                  <span className="card-body-content fs-2xl">{infoDataUser.male || 0}</span>
                 </div>
               </Card>
               <Card>
                 <div className="card-body pointer">
                   <span className="card-body-name fs-l">Female</span>
-                  <span className="card-body-content fs-2xl">{infoDataEmployee.female || 0}</span>
+                  <span className="card-body-content fs-2xl">{infoDataUser.female || 0}</span>
                 </div>
               </Card>
             </div>
@@ -130,7 +130,7 @@ const Employee = () => {
             {/* --- BẢNG NHÂN VIÊN --- */}
             <div className="employee-table">
               <Card>
-                <EmployeeTable data={filtered} onDelete={getEmployees} onSelect={handleSelect} />
+                <UserTable data={filtered} onDelete={getUsers} onSelect={handleSelect} />
               </Card>
             </div>
           </div>
@@ -140,7 +140,7 @@ const Employee = () => {
         <TabPanel header="Add Employee">
           <div className="employee-form-card">
             <Card>
-              <EmployeeCreate onSuccess={getEmployees} />
+              <UserCreate onSuccess={getUsers} />
             </Card>
           </div>
         </TabPanel>
@@ -153,11 +153,7 @@ const Employee = () => {
         style={{ width: '50vw' }}
         onHide={() => setVisible(false)}
       >
-        <EmployeeUpdate
-          data={employeeSelected}
-          closeModal={() => setVisible(false)}
-          getEmployee={getEmployees}
-        />
+        <UserUpdate data={userSelected} closeModal={() => setVisible(false)} getUser={getUsers} />
       </Dialog>
 
       <Toast ref={toast} />
@@ -165,4 +161,4 @@ const Employee = () => {
   );
 };
 
-export default Employee;
+export default User;

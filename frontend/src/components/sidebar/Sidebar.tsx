@@ -41,8 +41,8 @@ type MenuItem = {
 };
 
 const menus: MenuItem[] = [
-  { key: 'dashboard', name: 'Dashboard', path: '/dashboard', icon: faChartBar }, // ✅ /dashboard mới đúng
-  { key: 'employee', name: 'Employee', path: '/employee', icon: faAddressCard },
+  { key: 'dashboard', name: 'Dashboard', path: '/dashboard', icon: faChartBar },
+  { key: 'employee', name: 'Employee', path: '/user', icon: faAddressCard },
   { key: 'timekeeping', name: 'Timekeeping', path: '/timekeeping', icon: faCalendarDays },
   { key: 'payroll', name: 'Payroll', path: '/payroll', icon: faHardDrive },
   { key: 'department', name: 'Department', path: '/department', icon: faFolder },
@@ -51,16 +51,14 @@ const menus: MenuItem[] = [
 ];
 
 const canSee = (item: MenuItem, role: Role) => {
-  if (role === 'role_1') return true; // admin: thấy tất cả
+  if (role === 'role_1') return true;
   if (role === 'role_2') return item.name !== 'Department';
   if (role === 'role_3') return !['Department', 'Employee'].includes(item.name);
-  return true; // mặc định: cứ cho thấy (tránh bị ẩn hết nếu role chưa load)
+  return true;
 };
 const Sidebar = () => {
-  // const
   const userRole = useSelector((state: any) => state.auth.user?.role_code);
-  console.log('ROLE CODE:', userRole); // 👈 kiểm tra đã lấy được chưa
-
+  console.log('ROLE CODE:', userRole);
   const location = useLocation();
 
   return (

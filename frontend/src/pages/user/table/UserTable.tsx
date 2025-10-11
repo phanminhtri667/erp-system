@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 import { useRef } from 'react';
-import AxiosInstance from '../../../services/axios';
-import apiUrl from '../../../constant/apiUrl';
+import { deleteUser } from '../../../services/userService';
 
 type Props = {
   data: any[];
@@ -12,20 +11,21 @@ type Props = {
   onSelect: (employee: any) => void;
 };
 
-const EmployeeTable = ({ data, onDelete, onSelect }: Props) => {
+const UserTable = ({ data, onDelete, onSelect }: Props) => {
   const toast = useRef<Toast | null>(null);
 
-  const deleteEmployee = async (id: number) => {
+  const handleDelete = async (user_code: string) => {
     try {
-      await AxiosInstance.delete(`${apiUrl.employee.index}/${id}`);
+      await deleteUser(user_code);
       onDelete?.();
       toast.current?.show({
         severity: 'success',
         summary: 'Success',
-        detail: 'Employee deleted successfully',
+        detail: 'User deleted successfully',
         life: 1500,
       });
-    } catch {
+    } catch (err) {
+      console.error('Delete failed:', err);
       toast.current?.show({
         severity: 'error',
         summary: 'Error',
@@ -35,13 +35,13 @@ const EmployeeTable = ({ data, onDelete, onSelect }: Props) => {
     }
   };
 
-  const confirmDelete = (emp: any) => {
+  const confirmDelete = (u: any) => {
     confirmDialog({
-      message: `Do you want to delete employee ${emp.name}?`,
+      message: `Do you want to delete user ${u.user_name}?`,
       header: 'Delete Confirmation',
       icon: 'pi pi-info-circle',
       acceptClassName: 'p-button-danger',
-      accept: () => deleteEmployee(emp.id),
+      accept: () => handleDelete(u.user_code),
     });
   };
 
@@ -53,44 +53,41 @@ const EmployeeTable = ({ data, onDelete, onSelect }: Props) => {
         <thead>
           <tr>
             <th>#</th>
+            <th>User Code</th>
             <th>Full Name</th>
             <th>Phone</th>
-            <th>Address</th>
-            <th>Bank Info</th>
-            <th>Joined</th>
-            <th>Seniority</th>
-            <th>Total Salary</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Created At</th>
             <th>Action</th>
           </tr>
         </thead>
+
         <tbody>
           {data.length ? (
-            data.map((e, i) => (
-              <tr key={e.id}>
+            data.map((u, i) => (
+              <tr key={u.user_code}>
                 <td>{i + 1}</td>
-                <td>{e.name}</td>
-                <td>{e.phone}</td>
-                <td>{e.address}</td>
-                <td>
-                  {e.bank_info?.bank_name}
-                  <br />
-                  <small>{e.bank_info?.account_no}</small>
-                </td>
-                <td>{e.joined_date}</td>
-                <td>{e.seniority_years}</td>
-                <td>{Number(e.total_salary_paid).toLocaleString('vi-VN')}</td>
+                <td>{u.user_code}</td>
+                <td>{u.user_name}</td>
+                <td>{u.user_phone || '-'}</td>
+                <td>{u.user_email || '-'}</td>
+                <td>{u.role_code || '-'}</td>
+                <td>{u.created_at ? new Date(u.created_at).toLocaleDateString('vi-VN') : '-'}</td>
                 <td>
                   <div className="table-acction">
                     <Link to="#">
                       <i className="pi pi-eye pointer icon-hover" />
                     </Link>
+
                     <i
                       className="pi pi-pencil pointer icon-hover ml-3"
-                      onClick={() => onSelect?.(e)}
+                      onClick={() => onSelect?.(u)}
                     />
+
                     <i
                       className="pi pi-trash pointer icon-hover ml-3"
-                      onClick={() => confirmDelete(e)}
+                      onClick={() => confirmDelete(u)}
                     />
                   </div>
                 </td>
@@ -98,7 +95,7 @@ const EmployeeTable = ({ data, onDelete, onSelect }: Props) => {
             ))
           ) : (
             <tr>
-              <td colSpan={9}>
+              <td colSpan={8}>
                 <p style={{ textAlign: 'center' }}>No data</p>
               </td>
             </tr>
@@ -109,4 +106,4 @@ const EmployeeTable = ({ data, onDelete, onSelect }: Props) => {
   );
 };
 
-export default EmployeeTable;
+export default UserTable;

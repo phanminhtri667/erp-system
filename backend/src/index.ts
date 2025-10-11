@@ -2,9 +2,9 @@ import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
 import router from './routers/authRouter';
-import employeeRouter from './routers/employeeRouter';
 import notificationRouter from './routers/notificationRouter';
 import productRouter from './routers/productRouter';
+import userRouter from './routers/userRouter';
 
 const app = express();
 app.use(
@@ -18,7 +18,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 app.use('/api/auth', router);
-app.use('/api/employees', employeeRouter);
+app.use('/api/user', userRouter);
 app.use('/api/notification', notificationRouter);
 app.use('/api/products', productRouter);
 

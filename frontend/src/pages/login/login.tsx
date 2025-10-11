@@ -21,7 +21,7 @@ const Login = () => {
     setErrorMessage('');
 
     try {
-      const response = await AxiosInstance.post('/api/auth/login', { email, password });
+      const response = await AxiosInstance.post('/api/auth/login', { user_email: email, password });
       const { success, message, data } = response.data;
 
       if (success) {
