@@ -19,23 +19,24 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
+    dispatch(setUser({ id: 1, email: 'string', full_name: 'string' }));
+    navigate('/dashboard');
+    // try {
+    //   const response = await AxiosInstance.post('/api/auth/login', { user_email: email, password });
+    //   const { success, message, data } = response.data;
 
-    try {
-      const response = await AxiosInstance.post('/api/auth/login', { user_email: email, password });
-      const { success, message, data } = response.data;
-
-      if (success) {
-        localStorage.setItem('user', JSON.stringify(data));
-        localStorage.setItem('token', data.token);
-        dispatch(setUser(data));
-        navigate('/dashboard');
-      } else {
-        setErrorMessage(message || 'Đăng nhập thất bại!');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      setErrorMessage('Đăng nhập thất bại, vui lòng thử lại!');
-    }
+    //   if (success) {
+    //     localStorage.setItem('user', JSON.stringify(data));
+    //     localStorage.setItem('token', data.token);
+    //     dispatch(setUser(data));
+    //     navigate('/dashboard');
+    //   } else {
+    //     setErrorMessage(message || 'Đăng nhập thất bại!');
+    //   }
+    // } catch (error) {
+    //   console.error('Login error:', error);
+    //   setErrorMessage('Đăng nhập thất bại, vui lòng thử lại!');
+    // }
   };
 
   return (

@@ -17,7 +17,7 @@ const ProductTable = ({ data, onDelete, onSelect }: Props) => {
 
   const deleteEmployee = async (id: number) => {
     try {
-      await AxiosInstance.delete(`${apiUrl.employee.index}/${id}`);
+      await AxiosInstance.delete(`${apiUrl.user.index}/${id}`);
       onDelete?.();
       toast.current?.show({
         severity: 'success',
