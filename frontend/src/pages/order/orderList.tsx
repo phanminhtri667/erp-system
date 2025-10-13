@@ -22,7 +22,7 @@ const OrderList: React.FC<Props> = ({ orders, onChangeStatus }) => {
       <DataTable
         value={orders}
         paginator
-        rows={5}
+        rows={10}
         emptyMessage="Chưa có đơn hàng nào."
         responsiveLayout="scroll"
         className="text-sm"

@@ -84,6 +84,22 @@ const mockOrders: IOrder[] = [
     status: EOrderStatus.DELIVERED,
     created_at: '2025-10-10T14:30:00Z',
   },
+  {
+    id: String(Math.floor(Math.random() * 8888888)),
+    customer_name: 'Đặng Thị K',
+    product_name: 'Giày cao gót nữ',
+    quantity: 1,
+    status: EOrderStatus.DELIVERED,
+    created_at: '2025-10-10T14:30:00Z',
+  },
+  {
+    id: String(Math.floor(Math.random() * 8888888)),
+    customer_name: 'Đặng Thị L',
+    product_name: 'Giày cao gót nữ',
+    quantity: 1,
+    status: EOrderStatus.DELIVERED,
+    created_at: '2025-10-10T14:30:00Z',
+  },
 ];
 
 export default function Order() {
