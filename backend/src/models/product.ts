@@ -13,12 +13,8 @@ interface ProductAttributes {
   size_code?: string;
   color_code?: string;
   material_code?: string;
-  available?: number;
-  defective?: number;
   cost_price?: number;
   selling_price?: number;
-  date?: Date;
-  total_item?: number;
   note?: string;
 }
 
@@ -26,12 +22,8 @@ interface ProductCreationAttributes
   extends Optional<
     ProductAttributes,
     | 'images'
-    | 'available'
-    | 'defective'
     | 'cost_price'
     | 'selling_price'
-    | 'date'
-    | 'total_item'
     | 'note'
   > {}
 
@@ -46,12 +38,8 @@ class Product
   public size_code?: string;
   public color_code?: string;
   public material_code?: string;
-  public available?: number;
-  public defective?: number;
   public cost_price?: number;
   public selling_price?: number;
-  public date?: Date;
-  public total_item?: number;
   public note?: string;
 }
 
@@ -97,23 +85,11 @@ Product.init(
         key: 'material_code',
       },
     },
-    available: {
-      type: DataTypes.INTEGER,
-    },
-    defective: {
-      type: DataTypes.INTEGER,
-    },
     cost_price: {
       type: DataTypes.FLOAT,
     },
     selling_price: {
       type: DataTypes.FLOAT,
-    },
-    date: {
-      type: DataTypes.DATE,
-    },
-    total_item: {
-      type: DataTypes.INTEGER,
     },
     note: {
       type: DataTypes.TEXT,
@@ -127,7 +103,6 @@ Product.init(
   },
 );
 
-// 🧩 Associations
 Product.belongsTo(Category, { foreignKey: 'category_code', as: 'category' });
 Product.belongsTo(Size, { foreignKey: 'size_code', as: 'size' });
 Product.belongsTo(Color, { foreignKey: 'color_code', as: 'color' });

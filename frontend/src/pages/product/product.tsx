@@ -5,7 +5,7 @@ import { Toast } from 'primereact/toast';
 import { useEffect, useRef, useState } from 'react';
 import { productService } from '../../services/productServices';
 import './product.scss';
-import { ProductForm } from './productCreate';
+import { CreateProduct } from './productCreate';
 import ProductTable from './table/productTable';
 
 const Product = () => {
@@ -65,7 +65,7 @@ const Product = () => {
 
         <TabPanel header="Add Product">
           <div className="product-form-card">
-            <ProductForm />
+            <CreateProduct />
           </div>
         </TabPanel>
       </TabView>

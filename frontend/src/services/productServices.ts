@@ -2,11 +2,15 @@ import apiUrl from '../constant/apiUrl';
 import AxiosInstance from './axios';
 
 export interface ICreateProductPayload {
-  supplier_item_code: string;
-  our_code: string;
-  category: string;
-  name: string;
-  images: Base64URLString[] | null;
+  product_code: string;
+  product_name: string;
+  cost_price: number;
+  selling_price: number;
+  size_code: string;
+  color_code: string;
+  material: string | null;
+  category: string | null;
+  images: string[];
 }
 
 export const productService = {
