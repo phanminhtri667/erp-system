@@ -9,7 +9,7 @@ const mockOrders: IOrder[] = [
     customer_name: 'Nguyễn Văn A',
     product_name: 'Áo sơ mi nam trắng',
     quantity: 2,
-    status: EOrderStatus.SALE_ORDER,
+    status: EOrderStatus.ADMIN_REJECTED,
     created_at: '2025-10-01T09:00:00Z',
   },
   {
@@ -73,7 +73,7 @@ const mockOrders: IOrder[] = [
     customer_name: 'Trịnh Quốc I',
     product_name: 'Balo laptop',
     quantity: 1,
-    status: EOrderStatus.SALE_ORDER,
+    status: EOrderStatus.WAITING_ADMIN_APPROVAL,
     created_at: '2025-10-09T17:00:00Z',
   },
   {
@@ -96,7 +96,7 @@ export default function Order() {
       customer_name: data.customer_name,
       product_name: data.product_name,
       quantity: data.quantity,
-      status: EOrderStatus.SALE_ORDER,
+      status: EOrderStatus.WAITING_DEPOSIT,
       created_at: new Date().toISOString(),
     };
     setOrders((prev) => [newOrder, ...prev]);

@@ -10,7 +10,6 @@ interface OrderStatusBadgeProps {
  */
 const OrderStatusBadge: React.FC<OrderStatusBadgeProps> = ({ status }) => {
   const colorMap: Record<EOrderStatus, string> = {
-    [EOrderStatus.SALE_ORDER]: 'bg-gray-400',
     [EOrderStatus.WAITING_ADMIN_APPROVAL]: 'bg-yellow-400',
     [EOrderStatus.ADMIN_APPROVED]: 'bg-blue-500',
     [EOrderStatus.ADMIN_REJECTED]: 'bg-red-500',

@@ -11,9 +11,7 @@ interface Props {
 export default function OrderActionButtons({ order, onChangeStatus }: Props) {
   const { id, status } = order;
 
-  // mapping hành động theo trạng thái
   const actions: Partial<Record<EOrderStatus, { next: EOrderStatus; label: string }>> = {
-    [EOrderStatus.SALE_ORDER]: { next: EOrderStatus.WAITING_DEPOSIT, label: 'Chờ cọc' },
     [EOrderStatus.WAITING_DEPOSIT]: { next: EOrderStatus.DEPOSIT_CONFIRMED, label: 'Xác nhận cọc' },
     [EOrderStatus.DEPOSIT_CONFIRMED]: {
       next: EOrderStatus.SUPPLIER_PROCESSING,

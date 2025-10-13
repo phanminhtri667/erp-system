@@ -1,7 +1,7 @@
 // Enum trạng thái đơn hàng
 export enum EOrderStatus {
-  /** Sale tạo đơn mới */
-  SALE_ORDER = 'SALE_ORDER',
+  /** Chờ khách đặt cọc */
+  WAITING_DEPOSIT = 'WAITING_DEPOSIT',
 
   /** Chờ admin duyệt */
   WAITING_ADMIN_APPROVAL = 'WAITING_ADMIN_APPROVAL',
@@ -11,9 +11,6 @@ export enum EOrderStatus {
 
   /** Admin từ chối duyệt */
   ADMIN_REJECTED = 'ADMIN_REJECTED',
-
-  /** Chờ khách đặt cọc */
-  WAITING_DEPOSIT = 'WAITING_DEPOSIT',
 
   /** Xác nhận đã nhận cọc */
   DEPOSIT_CONFIRMED = 'DEPOSIT_CONFIRMED',
@@ -47,12 +44,11 @@ export enum EOrderStatus {
 }
 
 export const OrderStatusLabel: Record<EOrderStatus, string> = {
-  [EOrderStatus.SALE_ORDER]: 'Đơn hàng mới (Sale tạo)',
-  [EOrderStatus.WAITING_ADMIN_APPROVAL]: 'Chờ Admin duyệt',
-  [EOrderStatus.ADMIN_APPROVED]: 'Admin đã duyệt',
   [EOrderStatus.ADMIN_REJECTED]: 'Admin từ chối duyệt',
   [EOrderStatus.WAITING_DEPOSIT]: 'Chờ đặt cọc',
   [EOrderStatus.DEPOSIT_CONFIRMED]: 'Đã nhận cọc',
+  [EOrderStatus.WAITING_ADMIN_APPROVAL]: 'Chờ Admin duyệt',
+  [EOrderStatus.ADMIN_APPROVED]: 'Admin đã duyệt',
   [EOrderStatus.SUPPLIER_PROCESSING]: 'NCC đang xử lý',
   [EOrderStatus.SUPPLIER_FINISHED]: 'NCC đã hoàn tất',
   [EOrderStatus.WAREHOUSE_RECEIVED]: 'Kho đã nhận hàng',
