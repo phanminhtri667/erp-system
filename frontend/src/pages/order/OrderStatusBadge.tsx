@@ -5,10 +5,7 @@ interface OrderStatusBadgeProps {
   status: EOrderStatus;
 }
 
-/**
- * Hiển thị badge trạng thái đơn hàng
- */
-const OrderStatusBadge: React.FC<OrderStatusBadgeProps> = ({ status }) => {
+export const OrderStatusBadge: React.FC<OrderStatusBadgeProps> = ({ status }) => {
   const colorMap: Record<EOrderStatus, string> = {
     [EOrderStatus.WAITING_ADMIN_APPROVAL]: 'bg-yellow-400',
     [EOrderStatus.ADMIN_APPROVED]: 'bg-blue-500',
@@ -34,5 +31,3 @@ const OrderStatusBadge: React.FC<OrderStatusBadgeProps> = ({ status }) => {
     </span>
   );
 };
-
-export default OrderStatusBadge;

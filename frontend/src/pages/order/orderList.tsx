@@ -2,8 +2,8 @@ import React from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { IOrder } from './types/order';
-import OrderStatusBadge from './OrderStatusBadge';
-import OrderActionButtons from './orderActionButtons';
+import { OrderActionButtons } from './orderActionButtons';
+import { OrderStatusBadge } from './orderStatusBadge';
 
 interface Props {
   orders: IOrder[];

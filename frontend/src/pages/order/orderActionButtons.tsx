@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 import { EOrderStatus, IOrder } from './types/order';
@@ -8,7 +7,7 @@ interface Props {
   onChangeStatus: (id: string, status: EOrderStatus) => void;
 }
 
-export default function OrderActionButtons({ order, onChangeStatus }: Props) {
+export const OrderActionButtons = ({ order, onChangeStatus }: Props) => {
   const { id, status } = order;
 
   const actions: Partial<Record<EOrderStatus, { next: EOrderStatus; label: string }>> = {
@@ -58,4 +57,4 @@ export default function OrderActionButtons({ order, onChangeStatus }: Props) {
       />
     </div>
   );
-}
+};

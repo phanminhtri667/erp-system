@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IOrder, EOrderStatus, IOrderCreatePayload } from './types/order';
-import OrderCreateDialog from './OrderCreateDialog';
 import OrderList from './orderList';
+import OrderCreateDialog from './orderCreateDialog';
 
 const mockOrders: IOrder[] = [
   {
